@@ -3,19 +3,28 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.authenticate(params[:email], params[:password])
-    if user
+    user = User.authenticate(params[:username], params[:password])
+    ws_login = User.login_user(params[:username], params[:password])
+    debugger
+    if user and ws_login[:logintype].to_i >= 1
       session[:user_id] = user.id
+      session[:user_id_ws] = ws_login[:user_id]
       redirect_to root_url, :notice => "Logged In!"
     else
-      flash.now.alert = "Invalid email or password"
+      User.logout(ws_login[:user_id])
+      flash.now.alert = "Invalid username or password"
       render "new"
     end
   end
 
   def destroy
-    session[:user_id] = nil
-    redirect_to root_url, :notice => "Logged Out!"
+    if User.logout(session[:user_id_ws])
+      session[:user_id] = nil
+      session[:user_id_ws] = nil
+      redirect_to root_url, :notice => "Logged Out!"
+    else
+      flash.now.alert = "Can't logout"
+    end
   end
 
 end

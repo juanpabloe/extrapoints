@@ -1,17 +1,20 @@
 class User < ActiveRecord::Base
   
   attr_accessor :password
-  attr_accessible :email, :username, :password, :password_confirmation
+
+  #Username tiene que ser la matricula
+  attr_accessible :email, :username, :password, :password_confirmation,
+                  :first_name, :last_name, :dob, :points
 
   before_save :encrypt_password
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
-  validates_presence_of :email
-  validates_uniqueness_of :email
+  validates_presence_of :email, :username
+  validates_uniqueness_of :email, :username
 
-  def self.authenticate(email, password)
-    user = find_by_email(email)
+  def self.authenticate(username, password)
+    user = find_by_username(username)
     if user && user.password_hash = BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
@@ -26,16 +29,26 @@ class User < ActiveRecord::Base
     end
   end
 
-  def login_user(username, password, ip_address)
-    client = Savon::Client.new("http://10.16.194.209:8080/mobileMoney/webServiceBackup2.php?wsdl")
+  def self.login_user(username, password)
+    client = Savon::Client.new("http://10.16.194.209:8080/mobileMoney/webServiceBackup2punto0.php?wsdl")
 
     response = client.request :wsdl, :login do
       soap.body =
         "<username>#{username}</username>
         <password>#{password}</password>
-        <imei>#{ip_address}</imei>"
+        <imei>nil</imei>"
     end
+    response[:res_message]
+  end
 
+  def self.logout(id)
+    client = Savon::Client.new("http://10.16.194.209:8080/mobileMoney/webServiceBackup2punto0.php?wsdl")
+
+    response = client.request :wsdl, :logout do
+      soap.body =
+        "<userId>#{id}</userId>"
+    end
+    response[:res_message][:user]
   end
 
 end
