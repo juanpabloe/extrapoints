@@ -13,4 +13,8 @@ class UsersController < ApplicationController
       render "new"
     end
   end
+  
+  def menu 
+    render "main_menu"
+  end
 end
