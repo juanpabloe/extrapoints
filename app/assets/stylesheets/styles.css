@@ -1,6 +1,6 @@
 body {
   background-color: #4B7399;
-  font-family: Verdana, Helvetica, Arial;
+  font-family: Arial, Helvetica, Verdana;
   font-size: 14px;
 }
 
@@ -18,8 +18,8 @@ a {
   overflow: hidden;
 }
 
-#container {
-
+#wrapper #container {
+  padding:10px;
 }
 
 #flash_notice, #flash_error, #flash_alert {
@@ -68,3 +68,62 @@ a {
 .error_messages ul {
   margin: 0;
 }
+
+#logo-login {
+  text-align:center;
+}
+#login-form-bg {
+  padding: 10px;
+  border: 1px solid #999;
+  border-radius: 10px 10px 10px 10px;
+  background: #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5), 
+              inset 0 1px rgba(255,255,255,0.3), 
+              inset 0 10px rgba(255,255,255,0.2), 
+              inset 0 10px 20px rgba(255,255,255,0.25), 
+              inset 0 -15px 30px rgba(0,0,0,0.3);
+  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), 
+                  inset 0 1px rgba(255,255,255,0.3), 
+                  inset 0 10px rgba(255,255,255,0.2), 
+                  inset 0 10px 20px rgba(255,255,255,0.25), 
+                  inset 0 -15px 30px rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), 
+                      inset 0 1px rgba(255,255,255,0.3), 
+                      inset 0 10px rgba(255,255,255,0.2), 
+                      inset 0 10px 20px rgba(255,255,255,0.25), 
+                      inset 0 -15px 30px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), 
+                    inset 0 1px rgba(255,255,255,0.3),
+                    inset 0 10px rgba(255,255,255,0.2), 
+                    inset 0 10px 20px rgba(255,255,255,0.25), 
+                    inset 0 -15px 30px rgba(0,0,0,0.3);
+}
+
+#login-form {
+  width:70%;
+  border-radius:10px 10px 10px 10px;
+  margin:0 auto;
+  border: 1px solid #000;
+}
+
+#login-form legend {
+  background:#000;
+  width:98%;
+  box-shadow: 0 2px 6px #000, 
+            inset 0 1px #000,
+            inset 0 10px #000, 
+            inset 0 10px 20px #000,
+            inset 0 -15px 30px #000;
+  color:#fff;
+  padding:10px;
+  font-size:14px;
+  border-radius:10px 10px 0px 0px;
+  -webkit-border-radius:10px 10px 0px 0px;
+  -moz-border-radius:10px 10px 0px 0px;
+}
+
+#login-form .fieldcontain {
+  border-bottom: 1px solid #000;
+  padding:10px;
+}
+

@@ -5,8 +5,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:username], params[:password])
     ws_login = User.login_user(params[:username], params[:password])
-    debugger
-    if user and ws_login[:logintype].to_i >= 1
+    if ws_login[:logintype].to_i >= 1
       session[:user_id] = user.id
       session[:user_id_ws] = ws_login[:user_id]
       redirect_to root_url, :notice => "Logged In!"
