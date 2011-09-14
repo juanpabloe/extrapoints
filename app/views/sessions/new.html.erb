@@ -2,7 +2,6 @@
 <div id="logo-login"><%= image_tag("logo.png") %></div>
 <div id="login-form-bg">
   <%= form_tag sessions_path, :id=>'login-form' do %>
-    <legend>Ingresar</legend>
     <div class="fieldcontain">
       <%= label_tag :usuario %><br />
       <%= text_field_tag :username, params[:username] %>
