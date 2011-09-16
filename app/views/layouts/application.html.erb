@@ -23,10 +23,14 @@
   </head>
   <body>
     <div data-role="page" id="wrapper">
+   	<% if current_user %>
+		<header data-role="header">
+			<h1>Hola</h1>
+			<%= link_to "Log out", log_out_path %>
+		</header>
+		<% end %>
       <div id="logo-login"><%= image_tag("logo.png") %></div>
-      <%= content_tag :h1, yield(:title) if show_title? %>
       <%= yield %>
-
     </div>
   </body>
 </html>
