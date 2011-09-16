@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user and ws_login[:user_id].to_i >= 1
       session[:user_id] = user.id
       session[:user_id_ws] = ws_login[:user_id]
-      redirect_to users_path, :notice => "Logged In!"
+      redirect_to users_path
     else
       User.logout(ws_login[:user_id])
       flash.now.alert = "Invalid username or password"
