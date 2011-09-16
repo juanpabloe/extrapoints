@@ -1,10 +1,13 @@
 <div data-role="container" id="container">
-<div id="login-form-bg">
-  <% if current_user.student? %>
-    <%= render "student_menu" %>
-  <% elsif current_user.teacher? %>
-    <%= render "teacher_menu" %>
+  <div id="login-form-bg">
+    <% if current_user %>
+      <% if current_user.student? %>
+        <%= render "student_menu" %>
+      <% elsif current_user.teacher? %>
+        <%= render "teacher_menu" %>
+      <% end %>
     <% else %>
-<% end %>
-</div>
+      <%= link_to "Please log in", root_url %>
+    <% end %>
+  </div>
 </div>

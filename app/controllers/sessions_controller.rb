@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:username], params[:password])
     ws_login = User.login_user(params[:username], params[:password])
+    debugger
     if user and ws_login[:user_id].to_i >= 1
       session[:user_id] = user.id
       session[:user_id_ws] = ws_login[:user_id]
