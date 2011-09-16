@@ -33,22 +33,25 @@ class User < ActiveRecord::Base
     client = Savon::Client.new("http://10.16.194.209:8080/mobileMoney/webServiceBackup2.php?wsdl")
 
     response = client.request :wsdl, :login do
-      soap.body =
-        "<username>#{username}</username>
-        <password>#{password}</password>
-        <imei>nil</imei>"
+      soap.body = "<username>#{username}</username><password>#{password}</password>"
     end
     response[:res_message]
   end
 
   def self.logout(id)
     client = Savon::Client.new("http://10.16.194.209:8080/mobileMoney/webServiceBackup2.php?wsdl")
-
     response = client.request :wsdl, :logout do
-      soap.body =
-        "<userId>#{id}</userId>"
+      soap.body = "<userId>#{id}</userId>"
     end
     response[:res_message][:user]
+  end
+
+  def student?
+    self.role == 1
+  end
+
+  def teacher?
+    self.role == 2
   end
 
 end

@@ -1,8 +1,11 @@
 <div data-role="container" id="container">
 <div id="login-form-bg">
+  <% if current_user.student? %>
   <%= link_to "Menu 1", "#" %><br />
   <%= link_to "Menu 2", "#" %><br />
+  <% else %>
   <%= link_to "Menu 3", "#" %><br />
   <%= link_to "Menu 4", "#" %><br />
+<% end %>
 </div>
 </div>

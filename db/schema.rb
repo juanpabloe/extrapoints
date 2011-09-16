@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110913013313) do
+ActiveRecord::Schema.define(:version => 20110916212219) do
 
   create_table "students", :force => true do |t|
     t.datetime "created_at"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20110913013313) do
     t.string   "last_name"
     t.date     "dob"
     t.integer  "points"
-    t.string   "role"
+    t.integer  "role"
   end
 
 end
