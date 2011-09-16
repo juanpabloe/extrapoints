@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def self.login_user(username, password)
-    client = Savon::Client.new("http://10.16.194.209:8080/mobileMoney/webServiceBackup2.php?wsdl")
+    client = Savon::Client.new(MOBILE_MONEY)
 
     response = client.request :wsdl, :login do
       soap.body = "<username>#{username}</username><password>#{password}</password>"
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def self.logout(id)
-    client = Savon::Client.new("http://10.16.194.209:8080/mobileMoney/webServiceBackup2.php?wsdl")
+    client = Savon::Client.new(MOBILE_MONEY)
     response = client.request :wsdl, :logout do
       soap.body = "<userId>#{id}</userId>"
     end
