@@ -10,7 +10,11 @@ Extrapoints::Application.routes.draw do
   resources :users
   resources :sessions
   resources :teachers
-  resources :students
+  resources :students do
+    collection do
+      get "ranking"
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

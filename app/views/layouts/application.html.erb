@@ -28,8 +28,8 @@
     <div data-role="page" id="wrapper">
    	<% if current_user %>
 		<header data-role="header">
-			<h1><%= current_user.first_name %></h1>
 			<%= link_to "Log out", log_out_path %>
+      <h1><%= current_user.first_name %> <span id="user_points"> <%= current_user.points if current_user.student? %></span></h1>
 		</header>
 		<% end %>
       <div id="logo-login"><%= image_tag("logo.png") %></div>

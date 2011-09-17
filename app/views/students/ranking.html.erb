@@ -1,0 +1,8 @@
+<div data-role="container" id="container">
+  <%= paginate @students %>
+  <ol data-role="listview">
+  <% for student in @students do %>
+    <li><%= student.complete_name %> - <%= student.points %></li>
+  <% end %>
+</ol>
+</div>
