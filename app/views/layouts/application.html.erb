@@ -10,13 +10,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Extrapoints" %></title>
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" %>
-    <script>
-     $(document).bind("mobileinit", function(){
-      $.extend(  $.mobile , {
-        ajaxEnabled: false
-      });
-    });
-    </script>
+    <%= javascript_include_tag "custom-jquery.mobile.js" %>
     <%= javascript_include_tag "jquery.mobile-1.0b3.min.js" %>
     
     <%= csrf_meta_tag %>
