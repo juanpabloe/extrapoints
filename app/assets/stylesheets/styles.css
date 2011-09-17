@@ -1,5 +1,5 @@
 body {
-  background-color: #0489B1;
+  background-color: #81BEF7;
   font-family: Arial, Helvetica, Verdana;
   font-size: 14px;
 }
@@ -16,6 +16,14 @@ a {
   clear: both;
   height: 0;
   overflow: hidden;
+}
+
+.clearfix {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
 }
 
 #wrapper {
@@ -71,6 +79,10 @@ a {
 
 .error_messages ul {
   margin: 0;
+}
+
+header {
+	margin-bottom:20px;
 }
 
 #logo-login {
@@ -134,3 +146,17 @@ a {
   padding:10px;
 }
 
+#main-menu {
+	width:40%;
+	margin:0 auto;
+}
+
+#main-menu a {
+	float: left;
+	width:50%;
+	text-align:center;
+}
+
+#main-menu #menu-icon-5 {
+	width:100%;
+}
