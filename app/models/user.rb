@@ -47,11 +47,11 @@ class User < ActiveRecord::Base
   end
 
   def student?
-    self.role == 1
+    self.type == 'Student'
   end
 
   def teacher?
-    self.role == 2
+    self.type == 'Teacher'
   end
 
 end

@@ -1,13 +1,17 @@
 Extrapoints::Application.routes.draw do
+
   get "sessions/new"
 
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
-  match "menu" => "users#menu", :as => "menu" 
+
   root :to => "sessions#new"
   resources :users
   resources :sessions
+  resources :teachers
+  resources :students
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
