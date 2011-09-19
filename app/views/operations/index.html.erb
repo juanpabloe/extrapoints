@@ -1,0 +1,27 @@
+<h1>Listing operations</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Amount</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @operations.each do |operation| %>
+  <tr>
+    <td><%= operation.type %></td>
+    <td><%= operation.amount %></td>
+    <td><%= operation.description %></td>
+    <td><%= link_to 'Show', operation %></td>
+    <td><%= link_to 'Edit', edit_operation_path(operation) %></td>
+    <td><%= link_to 'Destroy', operation, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Operation', new_operation_path %>

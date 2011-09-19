@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= @operation.type %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @operation.amount %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @operation.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_operation_path(@operation) %> |
+<%= link_to 'Back', operations_path %>

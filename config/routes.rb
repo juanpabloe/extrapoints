@@ -1,5 +1,7 @@
 Extrapoints::Application.routes.draw do
 
+  resources :operations
+
   get "sessions/new"
 
   get "log_out" => "sessions#destroy", :as => "log_out"

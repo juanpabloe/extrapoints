@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
   end
 
   def ranking
-    @students = Student.order("points").page(params[:page]).per(10)
+    @students = Student.ordered.page(params[:page]).per(10)
   end
 
 end

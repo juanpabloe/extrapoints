@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   
+  has_one :operation, :foreign_key => "to_user_id", :class_name => "Operation"
+  has_one :operation, :foreign_key => "from_user_id", :class_name => "Operation"
+
   attr_accessor :password
 
   #Username tiene que ser la matricula
