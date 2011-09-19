@@ -1,7 +1,7 @@
 <div data-role="container" id="container">
   <div id="login-form-bg">
     <div id="main-menu">
-      <%= link_to (image_tag "icons/donar_icon.png"), "#", :id => 'menu-icon-1' %>
+      <%= link_to (image_tag "icons/donar_icon.png"), new_operation_path(:donate => true), :id => 'menu-icon-1' %>
       <%= link_to (image_tag "icons/historial_icon.png"), "#", :id => 'menu-icon-2' %>
       <%= link_to (image_tag "icons/ranking_icon.png"), ranking_students_path, :id => 'menu-icon-3' %>
       <%= link_to (image_tag "icons/logros_icon.png"), "#", :id => 'menu-icon-4' %>
