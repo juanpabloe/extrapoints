@@ -1,6 +1,6 @@
 Extrapoints::Application.routes.draw do
 
-  resources :operations
+  resources :operations, :donations
 
   get "sessions/new"
 
@@ -11,10 +11,18 @@ Extrapoints::Application.routes.draw do
   root :to => "sessions#new"
   resources :users
   resources :sessions
-  resources :teachers
+  resources :teachers do
+    collection do
+      get "menu"
+    end
+  end
   resources :students do
     collection do
       get "ranking"
+      get "menu"
+    end
+    member do
+      post "donate"
     end
   end
 

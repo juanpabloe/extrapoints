@@ -1,0 +1,14 @@
+<h2>Donation to <%= @student.complete_name %></h2>
+
+<%= form_for @donation do |f| %>
+  <%= f.label :amount %>
+  <%= f.text_field :amount %><br />
+
+  <%= f.label "Concepto" %>
+  <%= f.text_field :description %><br />
+
+  <%= f.hidden_field :from_user_id, :value => session[:user_id] %>
+  <%= f.hidden_field :to_user_id, :value => @student.id %>
+
+  <%= f.submit "Donar" %>
+<% end %>

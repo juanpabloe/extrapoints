@@ -37,9 +37,9 @@ class SessionsController < ApplicationController
 
   def after_sign_in_path(user)
       if user.student?
-        students_path
+        menu_students_path
       elsif user.teacher?
-        teachers_path
+        menu_teachers_path
       else
         users_path
       end

@@ -34,9 +34,10 @@ class User < ActiveRecord::Base
 
   def self.login_user(username, password)
     client = Savon::Client.new(MOBILE_MONEY)
+    user = User.find_by_username(username)
 
     response = client.request :wsdl, :login do
-      soap.body = "<username>#{username}</username><password>#{password}</password>"
+      soap.body = "<username>#{username}</username><password>#{password}</password><imei>#{user.id}</imei><imsi>#{user.id}</imsi>"
     end
     response[:res_message]
   end

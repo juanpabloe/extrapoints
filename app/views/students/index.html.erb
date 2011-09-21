@@ -1,11 +1,18 @@
-<div data-role="container" id="container">
-  <div id="login-form-bg">
-    <div id="main-menu">
-      <%= link_to (image_tag "icons/donar_icon.png"), new_operation_path(:donate => true), :id => 'menu-icon-1' %>
-      <%= link_to (image_tag "icons/historial_icon.png"), "#", :id => 'menu-icon-2' %>
-      <%= link_to (image_tag "icons/ranking_icon.png"), ranking_students_path, :id => 'menu-icon-3' %>
-      <%= link_to (image_tag "icons/logros_icon.png"), "#", :id => 'menu-icon-4' %>
-      <%= link_to (image_tag "icons/regalo_icon.png"), "#", :id => 'menu-icon-5' %>
-    </div>
-  </div>
-</div>
+<h2>A quien deseas donarle puntos?</h2>
+
+<%= form_tag students_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<%= link_to 'Ver todos', students_path %>
+
+<ul>
+  <% @students.each do |student| %>
+    <li><%= link_to "#{student.complete_name}", donate_student_path(student) %></li>
+  <% end %>
+</ul>
+  
+<%= link_to 'Regresar al menú', menu_students_path %>
