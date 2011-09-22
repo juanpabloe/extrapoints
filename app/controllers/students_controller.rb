@@ -5,7 +5,6 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
-    @donation = Donation.new
   end
 
   def ranking
@@ -15,10 +14,23 @@ class StudentsController < ApplicationController
   def menu
   end
 
+  def make_donation
+    @student = Student.find(params[:id])
+    @donation = Donation.new
+  end
+
   def donate
-    from_user = Student.find(params[:from_user_id])
-    to_user = Student.find(params[:to_user_id])
+    from_user = Student.find(session[:user_id])
+    to_user = Student.find(params[:donation][:to_user_id])
+    amount = params[:donation][:amount].to_i
+
+    donation_res = Donation.begin_transfer(session[:user_id_ws], amount, from_user.pin, "a00123456") 
     
+    debugger
+    if donation_res.eql? "Your current balance is now"
+      #@donation.update_attributes(:points => amount, :from_user_id => from_user.id, :to_user_id => to_user.id)
+      redirect_to donations_path
+    end
   end
 
 end
