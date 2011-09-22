@@ -25,15 +25,36 @@
   </script>
   </head>
   <body>
-    <div data-role="page" id="wrapper">
-   	<% if current_user %>
-		<header data-role="header">
-			<%= link_to "Log out", log_out_path %>
-      <h1><%= current_user.first_name %> <span id="user_points"> <%= current_user.points if current_user.student? %></span></h1>
-		</header>
-		<% end %>
-      <div id="logo-login"><%= image_tag("logo.png") %></div>
-      <%= yield %>
+    <div data-role="page" data-add-back-btn="true" id="wrapper">
+     	<% if current_user %>
+		  <header data-role="header" data-theme="c">
+           <% if is_home_page? %>
+              <%= link_to "Fuera!", log_out_path %>
+           <% end -%>       
+			  <div id="logo-holder">
+			  	<%= image_tag("logo-header-bar.png") %>
+			  </div>
+		  </header>
+		  <% end %>
+		  <div data-role="container" id="container">
+		    <% if flash[:warning] or flash[:notice] %>
+           <div data-rel="dialog" id="notice" <% if flash[:warning] %>class="warning"<% end %>>
+             <%= flash[:warning] || flash[:notice] %>
+           </div>
+         <% end %>
+        <%= yield %>
+    	</div>
+    	<% if current_user %>
+		  <footer data-role="footer" data-position="fixed" data-theme="c">
+		    <div>
+		      <span id="notification-number">0</span>
+		      Notificaciones
+		    </div>  
+        <% if current_user.student?-%>
+        <div><%= current_user.first_name -%> - <%= current_user.points %></div>
+        <% end -%>
+		  </footer>
+		  <% end %>
     </div>
   </body>
 </html>
