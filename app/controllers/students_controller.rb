@@ -14,6 +14,11 @@ class StudentsController < ApplicationController
   def menu
   end
 
+  def history
+    @student = Student.find(params[:id])
+    @operations = @student.operations
+  end
+
   def make_donation
     @student = Student.find(params[:id])
     @donation = Donation.new 
@@ -32,7 +37,7 @@ class StudentsController < ApplicationController
       @donation.to_user = to_user
       if @donation.save
         update_student_points(from_user, to_user)
-        redirect_to donations_path
+        redirect_to history_student_path(from_user)
       end
     else 
        render "make_donation", :notice => "Error!"

@@ -24,6 +24,7 @@ Extrapoints::Application.routes.draw do
     member do
       get "make_donation"
       post "donate"
+      get "history"
     end
   end
 

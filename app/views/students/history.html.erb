@@ -1,0 +1,7 @@
+<h2>Historial de transacciones para: <%= @student.complete_name %></h2>
+
+<% @operations.each do |d| %>
+  <p><%= d.description %>, Amount: <%= d.amount %>, Para: <%= d.to_user.complete_name %>, Tipo: <%= d.type %></p>
+<% end %>
+
+<%= link_to "Menu", menu_students_path %>
