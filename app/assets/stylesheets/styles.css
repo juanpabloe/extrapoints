@@ -235,3 +235,11 @@ footer #notification-number {
 #search-donor-form #search.active {
 	color:#000;
 }
+
+#new_donation #to-user {
+	background:url('icons/user_icon.png') no-repeat left ;
+	z-index:2;
+}
+
+#new_donation #to-user input {
+}

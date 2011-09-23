@@ -9,11 +9,12 @@
     <link rel="apple-touch-icon-precomposed" href="/static/images/identity/HTML5_Badge_64.png" />
     <title><%= content_for?(:title) ? yield(:title) : "Extrapoints" %></title>
     <%= stylesheet_link_tag "application" %>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" />
-<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+	 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
     <%= javascript_include_tag "custom-jquery.mobile.js" %>
+    <%= javascript_include_tag "engine.js" %>
+    <%= javascript_include_tag "functions.js" %>
     
-<script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script>
     
     <%= csrf_meta_tag %>
     <%= yield(:head) %>

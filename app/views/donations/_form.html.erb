@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :amount %><br />
-    <%= f.number_field :amount %>
+    <%= f.number_field :amount, :value=>1.0 %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
@@ -22,4 +22,7 @@
   <div class="actions">
     <%= f.submit "Make donation"%>
   </div>
+ 
 <% end %>
+
+
