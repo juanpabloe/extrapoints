@@ -5,7 +5,6 @@ class OperationsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @operations }
     end
   end
 
@@ -19,10 +18,6 @@ class OperationsController < ApplicationController
   end
 
   def new
-    if params[:donate]
-      @donation = Operation.new(:type => 'donation')
-    end
-
 
   end
 
