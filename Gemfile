@@ -24,4 +24,5 @@ group :test, :development do
   gem 'nifty-generators'
   gem 'factory_girl_rails'
   gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'factory_girl_rails'
 end

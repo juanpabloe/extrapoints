@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   #Username tiene que ser la matricula
   attr_accessible :email, :username, :password, :password_confirmation,
-                  :first_name, :last_name, :dob, :points
+                  :first_name, :last_name, :dob, :points, :id, :pin, :type
 
   before_save :encrypt_password
 
