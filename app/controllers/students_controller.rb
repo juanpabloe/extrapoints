@@ -25,7 +25,6 @@ class StudentsController < ApplicationController
     amount = params[:donation][:amount].to_i
 
     donation_result = Donation.begin_transfer(session[:user_id_ws], amount, from_user.pin, to_user.username) 
-    
     if donation_result.eql? "Your current balance is now"
       #TODO: Refactorizar la creacion de la donacion
       @donation = Donation.create(:amount => amount, :description => params[:donation][:description])
