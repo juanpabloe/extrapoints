@@ -32,9 +32,9 @@ class StudentsController < ApplicationController
       @donation.to_user = to_user
       if @donation.save
         redirect_to donations_path
-      else 
-        render "make_donation", :notice => "Error!"
       end
+    else 
+       render "make_donation", :notice => "Error!"
     end
   end
 
