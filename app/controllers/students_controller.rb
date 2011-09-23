@@ -31,11 +31,17 @@ class StudentsController < ApplicationController
       @donation.from_user = from_user
       @donation.to_user = to_user
       if @donation.save
+        update_student_points(from_user, to_user)
         redirect_to donations_path
       end
     else 
        render "make_donation", :notice => "Error!"
     end
+  end
+
+  def update_student_points(from_user, to_user)
+    from_user.update_attributes(:points => Student.update_points(from_user.id))
+    to_user.update_attributes(:points => Student.update_points(to_user.id))
   end
 
 end

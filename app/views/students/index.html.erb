@@ -3,17 +3,9 @@
      <input type="search" placeholder="Ingresar nombre o apellido.." id="search" name="search" />
 <% end %>
 
-<<<<<<< HEAD
 <ul data-role="listview" data-theme="c">
 	<% @students.each do |student| %>
     <li><%= link_to "#{student.complete_name}", donate_student_path(student) %></li>
-=======
-<%= link_to 'Ver todos', students_path %>
-
-<ul>
-  <% @students.each do |student| %>
-    <li><%= link_to "#{student.complete_name}", make_donation_student_path(student) %></li>
->>>>>>> 20ff2a87d541a6c30803332dc83017c2996a639a
   <% end %>
 </ul>
   
