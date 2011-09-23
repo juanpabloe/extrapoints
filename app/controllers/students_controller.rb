@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
 
   def make_donation
     @student = Student.find(params[:id])
-    @donation = Donation.new
+    @donation = Donation.new 
   end
 
   def donate
@@ -24,12 +24,18 @@ class StudentsController < ApplicationController
     to_user = Student.find(params[:donation][:to_user_id])
     amount = params[:donation][:amount].to_i
 
-    donation_res = Donation.begin_transfer(session[:user_id_ws], amount, from_user.pin, "a00123456") 
+    donation_result = Donation.begin_transfer(session[:user_id_ws], amount, from_user.pin, to_user.username) 
     
-    debugger
-    if donation_res.eql? "Your current balance is now"
-      #@donation.update_attributes(:points => amount, :from_user_id => from_user.id, :to_user_id => to_user.id)
-      redirect_to donations_path
+    if donation_result.eql? "Your current balance is now"
+      #TODO: Refactorizar la creacion de la donacion
+      @donation = Donation.create(:amount => amount, :description => params[:donation][:description])
+      @donation.from_user = from_user
+      @donation.to_user = to_user
+      if @donation.save
+        redirect_to donations_path
+      else 
+        render "make_donation", :notice => "Error!"
+      end
     end
   end
 

@@ -1,1 +1,7 @@
-<h2>All donations</h2>
+<h2>Todas las donaciones</h2>
+
+<% @donations.each do |d| %>
+  <p><%= d.description %>, Amount: <%= d.amount %></p>
+<% end %>
+
+<%= link_to "Menu", menu_students_path %>
