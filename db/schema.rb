@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110919140654) do
+ActiveRecord::Schema.define(:version => 20110922024712) do
 
   create_table "donations", :force => true do |t|
     t.datetime "created_at"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20110919140654) do
     t.integer  "points"
     t.integer  "role"
     t.string   "type"
+    t.integer  "pin"
   end
 
 end

@@ -22,6 +22,7 @@ Extrapoints::Application.routes.draw do
       get "menu"
     end
     member do
+      get "make_donation"
       post "donate"
     end
   end
