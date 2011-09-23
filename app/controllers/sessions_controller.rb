@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       redirect_to after_sign_in_path(user)
     else
       User.logout(ws_login[:user_id])
-      render "new"
+      render "new", :notice => "Error!"
     end
   end
 
@@ -44,5 +44,8 @@ class SessionsController < ApplicationController
         users_path
       end
   end
+  
+   
+
 
 end

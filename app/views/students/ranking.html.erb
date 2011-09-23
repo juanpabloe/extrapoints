@@ -1,8 +1,13 @@
-<div data-role="container" id="container">
-  <%= paginate @students %>
-  <ol data-role="listview">
-  <% for student in @students do %>
-    <li><%= student.complete_name %> - <%= student.points %></li>
-  <% end %>
-</ol>
+<%= paginate @students %>
+<div data-role="container" id="container" >
+   <div id="title">L&Iacute;DERES ACTUALES</div>
+   <ul id="ranking-list" data-role="listview" >
+      <% @students.each_with_index do |student, index| %>
+      <li class="ranking-list-element" >
+         <div class="ranking-list-position"># <%= index + 1 %></div>
+         <div class="ranking-list-student"><%= student.first_name %></div>
+         <div class="ranking-list-points"><%= student.points %></div>
+      </li>
+      <% end %>
+   </ul>
 </div>
