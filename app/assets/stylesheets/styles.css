@@ -76,6 +76,9 @@ a {
   margin: 0;
 }
 
+.error {
+	color:red;
+}
 header,footer {
 	height:42px; /* Medida de la barra en iOS junto al padding suma 44px*/
 	overflow:hidden;
@@ -159,10 +162,6 @@ header #logo-holder {
 	text-align:center;
 }
 
-#main-menu a:hover {
-	background:none;
-}
-
 #main-menu #menu-icon-5 {
 	width:100%;
 }
@@ -198,7 +197,7 @@ footer #notification-number {
 ****************************************************************************************************
 ****************************************************************************************************/
 #ranking-list li {
-	height:1.3em;
+	height:2.3em;
 }
 #ranking-list div {
 	float:left;
@@ -216,5 +215,23 @@ footer #notification-number {
 
 #ranking-list .ranking-list-student {
 	width:50%;
+	padding-top:8px;
 }
 
+/***************************************************************************************************
+****************************************************************************************************
+***********************************************DONACION**********************************************
+****************************************************************************************************
+****************************************************************************************************/
+#search-donor-form {
+	padding:5px 10px 5px 10px;
+	background:#ccc;
+}
+
+#search-question {
+	padding-left:10px;
+}
+
+#search-donor-form #search.active {
+	color:#000;
+}

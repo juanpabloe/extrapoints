@@ -1,18 +1,21 @@
-<h2>A quien deseas donarle puntos?</h2>
-
-<%= form_tag students_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
+<div id="title">Mmmm... &iquest;A qui&eacute;n deseo donarle ahora?</div>
+<%= form_tag students_path,:id=>'search-donor-form', :method => 'get' do %>
+     <input type="search" placeholder="Ingresar nombre o apellido.." id="search" name="search" />
 <% end %>
 
+<<<<<<< HEAD
+<ul data-role="listview" data-theme="c">
+	<% @students.each do |student| %>
+    <li><%= link_to "#{student.complete_name}", donate_student_path(student) %></li>
+=======
 <%= link_to 'Ver todos', students_path %>
 
 <ul>
   <% @students.each do |student| %>
     <li><%= link_to "#{student.complete_name}", make_donation_student_path(student) %></li>
+>>>>>>> 20ff2a87d541a6c30803332dc83017c2996a639a
   <% end %>
 </ul>
   
-<%= link_to 'Regresar al menú', menu_students_path %>
+
+
