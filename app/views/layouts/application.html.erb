@@ -9,9 +9,11 @@
     <link rel="apple-touch-icon-precomposed" href="/static/images/identity/HTML5_Badge_64.png" />
     <title><%= content_for?(:title) ? yield(:title) : "Extrapoints" %></title>
     <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" %>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" />
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
     <%= javascript_include_tag "custom-jquery.mobile.js" %>
-    <%= javascript_include_tag "jquery.mobile-1.0b3.min.js" %>
+    
+<script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script>
     
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
@@ -30,6 +32,8 @@
 		  <header data-role="header" data-theme="c">
            <% if is_home_page? %>
               <%= link_to "Fuera!", log_out_path %>
+           <% else %>
+           	  <a data-rel="back" href=#">Atr&aacute;s</a>
            <% end -%>       
 			  <div id="logo-holder">
 			  	<%= image_tag("logo-header-bar.png") %>

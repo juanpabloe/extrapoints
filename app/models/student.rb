@@ -3,7 +3,11 @@ class Student < User
   scope :ordered, order("points DESC")
 
   def complete_name
-    self.first_name + " " + self.last_name
+  	 if self.first_name && self.last_name
+       self.first_name + " " + self.last_name
+    else
+       ""
+    end
   end
 
   def self.search(search)

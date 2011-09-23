@@ -1,0 +1,18 @@
+<h2>A quien deseas donarle puntos?</h2>
+
+<%= form_tag students_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<%= link_to 'Ver todos', students_path %>
+
+<ul>
+  <% @students.each do |student| %>
+    <li><%= link_to "#{student.complete_name}", donate_student_path(student) %></li>
+  <% end %>
+</ul>
+  
+<%= link_to 'Regresar al menú', menu_students_path %>
