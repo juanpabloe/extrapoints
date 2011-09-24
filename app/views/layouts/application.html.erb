@@ -39,6 +39,9 @@
 			  <div id="logo-holder">
 			  	<%= image_tag("logo-header-bar.png") %>
 			  </div>
+			  <%= link_to (image_tag "icons/home.png"), menu_students_path if current_user.student? %>
+			  <%= link_to (image_tag "icons/home.png"), menu_teachers_path if current_user.teacher? %>
+
 		  </header>
 		  <% end %>
 		  <div data-role="container" id="container">

@@ -264,3 +264,32 @@ h2#title {
 	background:url('icons/notebook-icon.png') no-repeat left #F0F0F0 ;
 	padding:.4em .3em .4em 1.7em
 }
+
+/***************************************************************************************************
+****************************************************************************************************
+*********************************************HISTORIAL**********************************************
+****************************************************************************************************
+****************************************************************************************************/
+#user-history li img {
+	margin: 20% 0px 30% 8px;
+}
+
+#user-history .transaction-info .users {
+	font-weight:bold;
+}
+
+#user-history .transaction-info .users .amount {
+	background:url('icons/small_arrow.png') no-repeat left;
+	padding-left:15px;
+}
+
+#user-history .transaction-info .description {
+	font-weight:bold;
+	color:#666;
+}
+
+#user-history .transaction-info .time-place .time {
+	background:url('icons/clock.png') no-repeat left;
+	padding-left:15px;
+	font-size:12px;
+}
