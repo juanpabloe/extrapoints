@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   def index
-    @students = Student.search(params[:search])
+    @students = Student.search(params[:search]).reject { |student| student.id == current_user.id}
   end
 
   def show

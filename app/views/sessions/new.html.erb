@@ -1,14 +1,18 @@
 <div id="logo-holder"><%= image_tag("logo.png") %></div>
-
-  <%= form_tag sessions_path, :id=>'login-form' do %>
-    <div class="fieldcontain">
-      <%= label_tag :usuario %><br />
-      <%= text_field_tag :username, params[:username] %>
-    </div>
-    <div class="fieldcontain">
-      <%= label_tag :contraseña %><br />
-      <%= password_field_tag :password %>
-    </div>
-    <p rel="external" data-ajax="false" class="button"><%= submit_tag "Ingresar", :rel=>"external" %></p>
-  <% end %>
+	 <% if flash[:warning] or flash[:notice] %>
+	  <div id="notice" <% if flash[:warning] %>class="warning"<% end %>>
+		 <%= flash[:warning] || flash[:notice] %>
+	  </div>
+	<% end %>
+	<%= form_tag sessions_path, :id=>'login-form' do %>
+	 <div class="fieldcontain">
+		<%= label_tag :usuario %><br />
+		<%= text_field_tag :username, params[:username] %>
+	 </div>
+	 <div class="fieldcontain">
+		<%= label_tag :contraseña %><br />
+		<%= password_field_tag :password %>
+	 </div>
+	 <p rel="external" data-ajax="false" class="button"><%= submit_tag "Ingresar", :rel=>"external" %></p>
+	<% end %>
 

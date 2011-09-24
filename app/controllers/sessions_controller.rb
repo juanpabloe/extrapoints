@@ -13,14 +13,14 @@ class SessionsController < ApplicationController
       redirect_to after_sign_in_path(user)
     else
       User.logout(ws_login[:user_id])
-      render "new", :notice => "Error!"
+      redirect_to log_in_path, :notice => "Verifica tu nombre de usuario o contrasena"
     end
   end
 
   def destroy
     if User.logout(session[:user_id_ws])
       destroy_session_credentials
-      redirect_to root_url, :notice => "Logged Out!"
+      redirect_to root_url
     else
       flash.now.alert = "Can't logout"
     end

@@ -5,17 +5,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
     <meta name="viewport" content="target-densitydpi=device-dpi">
-    <link rel="apple-touch-icon" href="/static/images/identity/HTML5_Badge_64.png" />
-    <link rel="apple-touch-icon-precomposed" href="/static/images/identity/HTML5_Badge_64.png" />
+    <link rel="apple-touch-icon" href="/assets/images/Frogger.png" />
+    <link rel="apple-touch-icon-precomposed" href="/assets/images/Frogger.png" />
     <title><%= content_for?(:title) ? yield(:title) : "Extrapoints" %></title>
-    <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "styles" %>  
+	 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" />
 	 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-    <%= javascript_include_tag "custom-jquery.mobile.js" %>
-    <%= javascript_include_tag "engine.js" %>
-    <%= javascript_include_tag "functions.js" %>
-    
-		<script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script>
-    
+	 <%= javascript_include_tag "custom-jquery.mobile.js" %>
+	 <script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script>
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
     <script>
@@ -44,14 +41,9 @@
 
 		  </header>
 		  <% end %>
-		  <div data-role="container" id="container">
-		    <% if flash[:warning] or flash[:notice] %>
-           <div data-rel="dialog" id="notice" <% if flash[:warning] %>class="warning"<% end %>>
-             <%= flash[:warning] || flash[:notice] %>
-           </div>
-         <% end %>
-        <%= yield %>
-    	</div>
+		  <div data-role="container" id="container">  
+           <%= yield %>
+    	  </div>
     	<% if current_user %>
 		  <footer data-role="footer" data-position="fixed" data-theme="c">
 		    <div>
