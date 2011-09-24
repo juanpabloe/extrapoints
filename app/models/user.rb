@@ -50,6 +50,14 @@ class User < ActiveRecord::Base
     response[:res_message][:user]
   end
 
+  def self.update_points(id)
+    client = Savon::Client.new(MOBILE_MONEY)
+    response = client.request :wsdl, :get_state do
+      soap.body = "<userId>#{id}</userId>"
+    end
+    response[:res_message][:balance].to_i
+  end
+
   def student?
     self.type == 'Student'
   end
