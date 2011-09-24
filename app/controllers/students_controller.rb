@@ -8,7 +8,8 @@ class StudentsController < ApplicationController
   end
 
   def ranking
-    @students = Student.ordered.page(params[:page]).per(10)
+    # Para actualizar el balance de puntos de cada estudiante por si alguno cambio
+    @students = Student.ordered.limit(10).each { |s| update_student_points(s) }
   end
 
   def menu
@@ -30,13 +31,16 @@ class StudentsController < ApplicationController
     amount = params[:donation][:amount].to_i
 
     donation_result = Donation.begin_transfer(session[:user_id_ws], amount, from_user.pin, to_user.username) 
+
+    # Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
     if donation_result.eql? "Your current balance is now"
       #TODO: Refactorizar la creacion de la donacion
       @donation = Donation.create(:amount => amount, :description => params[:donation][:description])
       @donation.from_user = from_user
       @donation.to_user = to_user
       if @donation.save
-        update_student_points(from_user, to_user)
+        update_student_points(from_user)
+        update_student_points(to_user)
         redirect_to history_student_path(from_user)
       end
     else 
@@ -44,9 +48,9 @@ class StudentsController < ApplicationController
     end
   end
 
-  def update_student_points(from_user, to_user)
-    from_user.update_attributes(:points => Student.update_points(from_user.id))
-    to_user.update_attributes(:points => Student.update_points(to_user.id))
+  #Metodo para sincronizar el balance de puntos del estudiante con la base de datos de los webservices
+  def update_student_points(user)
+      user.update_attributes(:points => User.update_points(user.id))
   end
 
 end
