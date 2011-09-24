@@ -1,15 +1,9 @@
-<div id="title">Nueva donaci&oacute;n</div>
+<h2 id="title">Nueva donaci&oacute;n</h2>
 
 <%= form_for @donation, :url => donate_student_path(@student) do |f| %>
-  <div id="to-user">
-     <%= f.text_field :to, :value=>@student.complete_name, 'data-icon'=>"phone-touch" %>
-  </div>
-  <div id="points-to-give">
-     <%= f.number_field :amount, :placeholder=>'Monto...' %>
-  </div>
-  <div id="points-description">
-     <%= f.text_field :description, :placeholder=>'Concepto...' %>
-  </div>
+  <%= f.text_field :to, :value=>@student.complete_name, :disabled => true %>
+  <%= f.number_field :amount, :placeholder=>'Puntos...' %>
+  <%= f.text_field :description, :placeholder=>'Concepto...' %>
   <%= f.hidden_field :to_user_id, :value => @student.id %>
   <%= f.submit "Donar" %>
 <% end %>

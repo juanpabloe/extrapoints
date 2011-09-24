@@ -1,7 +1,16 @@
-<h2>Historial de transacciones para: <%= @student.complete_name %></h2>
-
-<% @operations.each do |d| %>
-  <p><%= d.description %>, Amount: <%= d.amount %>, Para: <%= d.to_user.complete_name %>, Tipo: <%= d.type %></p>
-<% end %>
-
-<%= link_to "Menu", menu_students_path %>
+<h2 id="title">Historial de transacciones para: <%= @student.complete_name %></h2>
+<ul id="user-history" data-role="listview" data-theme="c">
+	<% @operations.each do |d| %>
+	  <li>
+	  	  <%= image_tag ("icons/#{d.type}.png") %>
+	  	  <div class="transaction-info">
+	  	     <p><%= d.to_user.complete_name %> </p>
+	  	     <p><%= d.amount %></p>
+	  	     <p><%= d.description %></p>
+	  	     <div class="time-place">
+	  	     	<span class="time"><%= d.created_at %></span>
+	  	     </div>
+	  	  </div>
+	  </li>
+	<% end %>
+</ul>

@@ -191,6 +191,19 @@ footer #notification-number {
 	text-shadow:none;
 }
 
+h2#title {
+	height:42px;
+	text-align:center;
+	background: #49A832;
+	line-height:42px;
+	color:#fff;
+	font-weight:bold;
+	text-shadow:none;
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	margin:0;
+}
+
 /***************************************************************************************************
 ****************************************************************************************************
 ***********************************************RANKING**********************************************
@@ -225,7 +238,7 @@ footer #notification-number {
 ****************************************************************************************************/
 #search-donor-form {
 	padding:5px 10px 5px 10px;
-	background:#ccc;
+	background:#cctc;
 }
 
 #search-question {
@@ -236,10 +249,18 @@ footer #notification-number {
 	color:#000;
 }
 
-#new_donation #to-user {
-	background:url('icons/user_icon.png') no-repeat left ;
-	z-index:2;
+#new_donation #donation_to {
+	background:url('icons/user_icon.png') no-repeat left #F0F0F0 ;
+	padding:.4em .3em .4em 1.7em
 }
 
-#new_donation #to-user input {
+
+#new_donation #donation_amount {
+	background:url('icons/coins_icons.png') no-repeat left #F0F0F0 ;
+	padding:.4em .3em .4em 1.7em
+}
+
+#new_donation #donation_description {
+	background:url('icons/notebook-icon.png') no-repeat left #F0F0F0 ;
+	padding:.4em .3em .4em 1.7em
 }
