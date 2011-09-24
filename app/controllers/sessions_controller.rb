@@ -11,6 +11,9 @@ class SessionsController < ApplicationController
       assign_session_credentials(user, ws_login) 
       update_user_points(user)
       redirect_to after_sign_in_path(user)
+    elsif ws_login[:used_id] == -2
+      User.logout(ws_login[:user_id])
+      redirect_to log_in_path, :notice => "Ya te haz logueado en otro sistema"
     else
       User.logout(ws_login[:user_id])
       redirect_to log_in_path, :notice => "Verifica tu nombre de usuario o contrasena"
