@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     if ws_login
 		 if ws_login[:user_id].to_i >= 1
 		   assign_session_credentials(user, ws_login) 
-		   update_user_points(user)
+		   user.update_user_points
 		   redirect_to after_sign_in_path(user)
 		 elsif ws_login[:user_id].to_i == -2
 		   User.logout(ws_login[:user_id])
@@ -53,8 +53,5 @@ class SessionsController < ApplicationController
       end
   end
 
-  def update_user_points(user)
-      user.update_attributes(:points => User.update_points(user.id))
-  end
 
 end

@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
     Hash.from_xml(response.to_xml)["Envelope"]["Body"]["resMessage"]["result"]
   end
 
+  def update_user_points
+      self.update_attributes(:points => User.update_points(self.id))
+  end
+
   def student?
     self.type == 'Student'
   end

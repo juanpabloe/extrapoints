@@ -1,6 +1,5 @@
 class Donation < Operation
 
-
   def self.begin_transfer(user_id, amount, pin, receiver)
     client = Savon::Client.new(MOBILE_MONEY)
     response = client.request :wsdl, :begin_transfer do

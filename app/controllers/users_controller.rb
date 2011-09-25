@@ -18,5 +18,9 @@ class UsersController < ApplicationController
    @users = User.all  
   end
   
+  def history
+    @user = User.find(params[:id])
+    @operations = @user.operations
+  end
   
 end
