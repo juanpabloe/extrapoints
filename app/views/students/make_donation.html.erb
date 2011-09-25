@@ -6,8 +6,8 @@
 <% end %>
 <%= form_for @donation, :url => donate_student_path(@student) do |f| %>
   <%= f.text_field :to, :value=>@student.complete_name, :readonly => true %>
-  <%= f.number_field :amount, :placeholder=>'Puntos...', :min=>'0', :max=>"#{current_user.points}" %>
-  <%= f.text_field :description, :placeholder=>'Concepto...' %>
+  <%= f.number_field :amount, :placeholder=>'Puntos...', :min=>'1', :max=>"#{current_user.points}", :class=>"required"%>
+  <%= f.text_field :description, :placeholder=>'Concepto...', :class=>"required" %>
   <%= f.hidden_field :to_user_id, :value => @student.id %>
   <%= f.submit "Donar" %>
 <% end %>

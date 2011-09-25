@@ -1,29 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
-    <meta name="viewport" content="target-densitydpi=device-dpi">
-    <link rel="apple-touch-icon" href="/assets/images/tutsTouchIcon.jpg" />
-    <link rel="apple-touch-icon-precomposed" href="/assets/images/Frogger.png" />
-    <title><%= content_for?(:title) ? yield(:title) : "Extrapoints" %></title>
-    <%= stylesheet_link_tag "styles" %>  
-	 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" />
-	 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-	 <%= javascript_include_tag "custom-jquery.mobile.js" %>
-	 <%= javascript_include_tag "engine.js" %>
-	 <script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name=viewport content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
+		<meta name="viewport" content="target-densitydpi=device-dpi">
+		<link rel="apple-touch-icon" href="/assets/images/tutsTouchIcon.jpg" />
+		<link rel="apple-touch-icon-precomposed" href="/assets/images/Frogger.png" />
+		<%= stylesheet_link_tag "styles" %> 
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.css" /> 
+		<title><%= content_for?(:title) ? yield(:title) : "Extrapoints" %></title>	
+		<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+		<%= javascript_include_tag "engine.js" %>
+		<%= javascript_include_tag "custom-jquery.mobile.js" %>
+		<script src="http://code.jquery.com/mobile/1.0b3/jquery.mobile-1.0b3.min.js"></script>
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
-    <script>
-    window.addEventListener("load",function() {
-      setTimeout(function(){
-        // Esconde la barra de dirección
-        window.scrollTo(0, 1);
-      }, 0);
-    });
-  </script>
   </head>
   <body>
     <div data-role="page" data-add-back-btn="true" id="wrapper">
@@ -54,5 +46,6 @@
 		  </footer>
 		  <% end %>
     </div>
+   
   </body>
 </html>

@@ -1,5 +1,9 @@
 class Donation < Operation
 
+	validates_presence_of :amount
+	validates_numericality_of :amount, :greater_than => 0
+	validates_presence_of :description
+	
   def self.begin_transfer(user_id, amount, pin, receiver)
     client = Savon::Client.new(MOBILE_MONEY)
     response = client.request :wsdl, :begin_transfer do
