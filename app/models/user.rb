@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   validates_confirmation_of :password
   validates_presence_of :password, :on => :create
+  validates_presence_of :username, :on => :create
   validates_presence_of :email, :username
   validates_uniqueness_of :email, :username
 
@@ -35,7 +36,6 @@ class User < ActiveRecord::Base
   def self.login_user(username, password)
     client = Savon::Client.new(MOBILE_MONEY)
     user = User.find_by_username(username)
-
     response = client.request :wsdl, :login do
       soap.body = "<username>#{username}</username><password>#{password}</password><imei>#{user.id}</imei><imsi>#{user.id}</imsi>"
     end

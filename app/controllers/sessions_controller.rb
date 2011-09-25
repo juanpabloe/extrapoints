@@ -1,22 +1,25 @@
 class SessionsController < ApplicationController
-
   def new
     redirect_to after_sign_in_path(current_user) if current_user
   end
 
   def create
     user = User.authenticate(params[:username], params[:password])
-    ws_login = User.login_user(params[:username], params[:password])
-    if user and ws_login[:user_id].to_i >= 1
-      assign_session_credentials(user, ws_login) 
-      update_user_points(user)
-      redirect_to after_sign_in_path(user)
-    elsif ws_login[:used_id] == -2
-      User.logout(ws_login[:user_id])
-      redirect_to log_in_path, :notice => "Ya te haz logueado en otro sistema"
-    else
-      User.logout(ws_login[:user_id])
-      redirect_to log_in_path, :notice => "Verifica tu nombre de usuario o contrasena"
+    ws_login = User.login_user(params[:username], params[:password]) if user
+    if ws_login
+		 if ws_login[:user_id].to_i >= 1
+		   assign_session_credentials(user, ws_login) 
+		   update_user_points(user)
+		   redirect_to after_sign_in_path(user)
+		 elsif ws_login[:user_id].to_i == -2
+		   User.logout(ws_login[:user_id])
+		   redirect_to log_in_path, :notice => "Ya te haz logueado en otro sistema"
+		 else
+		   User.logout(ws_login[:user_id])
+		   redirect_to log_in_path, :notice => "Verifica tu nombre de usuario o contrasena"
+		 end
+    else 
+		redirect_to log_in_path, :notice => "Usuario incorrecto"
     end
   end
 
