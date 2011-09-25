@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+
+  before_filter :check_birthday, :only => [:create]
   def new
     redirect_to after_sign_in_path(current_user) if current_user
   end
@@ -13,7 +15,7 @@ class SessionsController < ApplicationController
 		   redirect_to after_sign_in_path(user)
 		 elsif ws_login[:user_id].to_i == -2
 		   User.logout(ws_login[:user_id])
-		   redirect_to log_in_path, :notice => "Ya te haz logueado en otro sistema"
+		   redirect_to log_in_path, :notice => "Ya te has logueado en otro sistema"
 		 else
 		   User.logout(ws_login[:user_id])
 		   redirect_to log_in_path, :notice => "Verifica tu nombre de usuario o contrasena"
