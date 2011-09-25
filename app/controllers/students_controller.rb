@@ -31,7 +31,6 @@ class StudentsController < ApplicationController
     amount = params[:donation][:amount].to_i
 
     donation_result = Donation.begin_transfer(session[:user_id_ws], amount, from_user.pin, to_user.username) 
-
     # Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
     if donation_result.eql? "Your current balance is now"
       #TODO: Refactorizar la creacion de la donacion
@@ -43,8 +42,8 @@ class StudentsController < ApplicationController
         update_student_points(to_user)
         redirect_to history_student_path(from_user)
       end
-    else 
-       render "make_donation", :notice => "Error!"
+    else
+       redirect_to make_donation_student_path(to_user), :notice => "El valor especificado es mayor a tus puntos actuales"
     end
   end
 
