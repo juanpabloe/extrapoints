@@ -49,9 +49,7 @@
 		      <span id="notification-number">0</span>
 		      Notificaciones
 		    </div>  
-        <% if current_user.student?-%>
-        <div><%= current_user.first_name -%> - <%= current_user.points %></div>
-        <% end -%>
+        <div><%= current_user.complete_name -%><%= - current_user.points if current_user.student? %></div>
 		  </footer>
 		  <% end %>
     </div>

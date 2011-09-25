@@ -53,4 +53,6 @@ class StudentsController < ApplicationController
       user.update_attributes(:points => User.update_points(user.id))
   end
 
+
+
 end
