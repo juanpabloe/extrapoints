@@ -43,7 +43,7 @@ class StudentsController < ApplicationController
         redirect_to history_student_path(from_user)
       end
     else
-       redirect_to make_donation_student_path(to_user), :notice => "El valor especificado es mayor a tus puntos actuales"
+       redirect_to make_donation_student_path(to_user), :notice => "Verifica los datos ingresados."
     end
   end
 
