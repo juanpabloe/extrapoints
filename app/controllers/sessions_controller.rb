@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
 
-  before_filter :check_birthday, :only => [:create]
   def new
     redirect_to after_sign_in_path(current_user) if current_user
   end
