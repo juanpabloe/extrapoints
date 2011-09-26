@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   
   def history
     @user = User.find(params[:id])
-    history = User.get_history(@user.id)
+    history = User.get_history(@user.id).reverse
     @operations = parse_history_result(history)
   end
   

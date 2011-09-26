@@ -1,0 +1,13 @@
+<h2 id="title">Retiro de puntos</h2>
+<% if flash[:warning] or flash[:notice] %>
+  <div id="notice" <% if flash[:warning] %>class="warning"<% end %>>
+	 <%= flash[:warning] || flash[:notice] %>
+  </div>
+<% end %>
+<%= form_for @withdraw, :url => withdraw_student_path(@student) do |f| %>
+  <%= f.text_field :to, :value=>@student.complete_name, :readonly => true %>
+  <%= f.number_field :amount, :placeholder=>'Puntos...', :class=>"required"%>
+  <%= f.text_field :description, :placeholder=>'Concepto...', :class=>"required" %>
+  <%= f.hidden_field :to_user_id, :value => @student.id %>
+  <%= f.submit "Donar" %>
+<% end %>
