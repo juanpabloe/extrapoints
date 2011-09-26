@@ -5,7 +5,11 @@
 
 <ul data-role="listview" data-theme="c">
 	<% @students.each do |student| %>
-    <li><%= link_to "#{student.complete_name}", make_donation_student_path(student) %></li>
+    <% if params[:withdraw] %>
+      <li><%= link_to "#{student.complete_name}", make_withdraw_student_path(student) %></li>
+    <% else %>
+      <li><%= link_to "#{student.complete_name}", make_donation_student_path(student) %></li>
+    <% end %>
   <% end %>
 </ul>
 
