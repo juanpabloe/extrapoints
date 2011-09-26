@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  concept: MyString
+  user_id: 1
+
+two:
+  concept: MyString
+  user_id: 1

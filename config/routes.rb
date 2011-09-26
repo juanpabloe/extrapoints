@@ -10,6 +10,7 @@ Extrapoints::Application.routes.draw do
 
   root :to => "sessions#new"
   resources :users do
+    resources :notifications
     member do
       get "history"
     end
