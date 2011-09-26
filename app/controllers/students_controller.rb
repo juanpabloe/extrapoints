@@ -62,7 +62,6 @@ class StudentsController < ApplicationController
       @withdraw = Withdraw.create(:amount => amount, :description => params[:withdraw][:description])
       @withdraw.from_user = from_user
       @withdraw.to_user = to_user
-      debugger
       if @withdraw.save
         update_user_points(from_user)
         update_user_points(to_user)

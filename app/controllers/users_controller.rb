@@ -40,7 +40,8 @@ class UsersController < ApplicationController
 		end	
 		records.keys.each_with_index do |index,i|
 			fecha_separada = records[index]['date'].split("-") #separamos la fecha en año, mes y dia
-			tiempo_separado = records[index]['time'].split("-") #separamos la fecha en hora,minutos y segundos
+			tiempo_separado = records[index]['time'].split(":") #separamos la fecha en hora,minutos y segundos
+      debugger
 			created_at = Time.local(fecha_separada[0],fecha_separada[1],fecha_separada[2],
 															tiempo_separado[0],tiempo_separado[1],tiempo_separado[2])
 			records[index]['created_at'] = created_at
