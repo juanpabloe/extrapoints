@@ -16,8 +16,10 @@ class StudentsController < ApplicationController
   end
 
   def menu
+    #TODO: Refactorizar este metodo
     if @bday_students
-      @notification = Notification.create(:concept => "B day", :user_id => current_user.id )
+      @notification = Notification.create(:concept => "B day")
+      @notification.user = current_user
       @notification.save
     end
   end

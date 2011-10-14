@@ -1,1 +1,7 @@
-<h2>hola</h2><h2>hola</h2>
+<h2 id="title">Cumpleaños</h2>
+
+<ul data-role="listview" data-theme="c">
+	<% @bday_students.each do |student| %>
+      <li><%= link_to "#{student.complete_name}", "#" %></li>
+  <% end %>
+</ul>
