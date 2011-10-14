@@ -1,0 +1,1 @@
+$(document).bind("mobileinit",function(){$.extend($.mobile,{ajaxEnabled:!1}),$.mobile.page.prototype.options.addBackBtn=!0})
