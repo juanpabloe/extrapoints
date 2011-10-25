@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 			created_at = Time.local(fecha_separada[0],fecha_separada[1],fecha_separada[2],
 															tiempo_separado[0],tiempo_separado[1],tiempo_separado[2])
 			records[index]['created_at'] = created_at
-			records[index]['complete_name'] = User.find_by_username(records[index]['user']).complete_name
+			records[index]['complete_name'] = User.find_by_username(records[index]['user'])
 		end
 		records
   end

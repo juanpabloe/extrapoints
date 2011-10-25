@@ -1,5 +1,7 @@
 class Student < User
 
+  belongs_to :team
+
   scope :ordered, order("points DESC")
 
   def self.search(search)
