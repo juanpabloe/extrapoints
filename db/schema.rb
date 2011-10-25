@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111017004821) do
+ActiveRecord::Schema.define(:version => 20111025023020) do
 
   create_table "donations", :force => true do |t|
     t.datetime "created_at"
@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20111017004821) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
     t.datetime "created_at"

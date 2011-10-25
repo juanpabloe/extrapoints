@@ -10,13 +10,11 @@ class User < ActiveRecord::Base
   attr_accessible :email, :username, :password, :password_confirmation,
                   :first_name, :last_name, :dob, :points, :id, :pin, :type
 
-  before_save :encrypt_password
+  after_create :encrypt_password
 
-  validates_confirmation_of :password
-  validates_presence_of :password, :on => :create
   validates_presence_of :username, :on => :create
-  validates_presence_of :email, :username
-  validates_uniqueness_of :email, :username
+  validates_presence_of :password, :on => :create
+  validates_uniqueness_of :username
 
   def self.authenticate(username, password)
     user = find_by_username(username)
