@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :username, :password, :password_confirmation,
                   :first_name, :last_name, :dob, :points, :id, :pin, :type
 
-  after_create :encrypt_password
+  before_save :encrypt_password
 
   validates_presence_of :username, :on => :create
   validates_presence_of :password, :on => :create
