@@ -1,5 +1,6 @@
 <h2 id="title">Mi Historial</h2>
 <ul id="user-history" data-role="listview" data-theme="c">
+	<% if @operations %>
 	<% @operations.keys.each_with_index do |index| %>
 	  <li>
 	  	  <%= image_tag ("icons/#{@operations[index]['type']}.png"), :class=>@operations[index]['type'] %>
@@ -10,6 +11,11 @@
 	  	     </div>
 	  	  </div>
 	  </li>
+	<% end %>
+	<% else %>
+		<li>
+			No tienes transacciones pasadas
+		</li>
 	<% end %>
 </ul>
 

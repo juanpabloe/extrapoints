@@ -1,27 +1,24 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Rake task para insertar en BD a los users de ExtraPoints
+require 'csv'
 
-s = Student.create(:first_name => "Alejandro", :last_name => "Mancillas", :pin => "1234", :dob => "1990-20-23",
-              :username => "a00123456", :points => 100)
-s.password = "123456789"
-s.save
+puts "Hola"
 
-s = Student.create(:first_name => "Adriana", :last_name => "Perez", :pin => "1234", :dob => "1990-20-23",
-              :username => "a00123", :points => 100)
-s.password = "123"
-s.save
+User.delete_all
 
-s = Student.create(:first_name => "Jose", :last_name => "Gonzalez", :pin => "1234", :dob => "1990-20-23",
-              :username => "a00111", :points => 100)
-s.password = "111"
-s.save
+puts "Creando profesores"
+CSV.open("ExtraPoints_Teachers.csv", "r").each do |row|
+  Teacher.create!(:username => row[3], :password => row[4], :first_name => row[0], :last_name => row[1], :dob => row[2], :pin => row[5], :points => row[6])
+end
 
-s = Teacher.create(:first_name => "Lorena", :last_name => "Gomez", :pin => "1234", :dob => "1990-20-23",
-              :username => "a00123", :points => 10000)
-s.password = "123"
-s.save
+puts "Creando estudiantes"
+CSV.open("ExtraPoints_Users.csv", "r").each do |row|
+  Student.create!(:username => row[3], :password => row[4], :first_name => row[0], :last_name => row[1], :dob => row[2], :pin => row[5], :points => row[6])
+end
+
+puts "Limpiando nombres y apellidos"
+User.all.each do |u|
+  u.first_name = u.first_name.strip
+  u.last_name = u.last_name.strip
+  u.save
+end
+
