@@ -9,5 +9,5 @@
   <%= f.number_field :amount, :placeholder=>'Puntos...', :min=>'1', :max=>"#{current_user.points}", :class=>"required"%>
   <%= f.text_field :description, :placeholder=>'Concepto...', :class=>"required" %>
   <%= f.hidden_field :to_user_id, :value => @student.id %>
-  <%= f.submit "Donar", :confirm => "¿Estas seguro de la donación?" %>
+  <a id="donar_confirm" data-role="button">Donar</a>
 <% end %>

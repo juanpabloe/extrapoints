@@ -7,14 +7,18 @@
 	  	  <div class="transaction-info">
 	  	     <p class="users"><%= @operations[index]['complete_name'] %><span class="amount"> <%= @operations[index]['amount'].to_i %> puntos</span> </p>
 	  	     <div class="time-place">
-	  	     	<span class="time"><%= time_ago_in_words(@operations[index]['created_at']) %></span>
+	  	     	<span class="time">
+	  	     		<%= @operations[index]['created_at'].strftime("%d/%m/%Y")%>
+	  	     		-
+	  	     		<%= @operations[index]['created_at'].strftime("%I:%M %p")%>
+	  	     	</span>
 	  	     </div>
 	  	  </div>
 	  </li>
 	<% end %>
 	<% else %>
 		<li>
-			No tienes transacciones pasadas
+			No existen transacciones registradas
 		</li>
 	<% end %>
 </ul>
