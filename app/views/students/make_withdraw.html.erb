@@ -6,8 +6,8 @@
 <% end %>
 <%= form_for @withdraw, :url => withdraw_student_path(@student) do |f| %>
   <%= f.text_field :to, :value=>@student.complete_name, :readonly => true %>
-  <%= f.number_field :amount, :placeholder=>'Puntos...', :class=>"required"%>
+  <%= f.number_field :amount, :placeholder=>'Puntos a retirar...', :class=>"required"%>
   <%= f.text_field :description, :placeholder=>'Concepto...', :class=>"required" %>
   <%= f.hidden_field :to_user_id, :value => @student.id %>
-  <%= f.submit "Donar" %>
+  <a id="withdrawal_confirm" data-role="button">Retirar</a>
 <% end %>
