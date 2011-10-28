@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+	
   has_many :notifications
   has_many :operations, :foreign_key => "to_user_id", :class_name => "Operation"
   has_many :operations, :foreign_key => "from_user_id", :class_name => "Operation"
@@ -64,6 +64,14 @@ class User < ActiveRecord::Base
     end
     #Regresa un arreglo de strings en el cual cada uno es un record del historial
     Hash.from_xml(response.to_xml)["Envelope"]["Body"]["resMessage"]["result"]
+  end
+  
+  def self.is_user_active?(id)
+    client = Savon::Client.new(MOBILE_MONEY)
+    response = client.request :wsdl, :getActiveState  do
+      soap.body = "<userId>#{id}</userId>"
+    end
+    response[:res_message][:active]
   end
 
   def update_user_points

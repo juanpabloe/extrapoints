@@ -3,12 +3,18 @@
 <% else %>
   <h2 id="title">Mmmm... &iquest;A qui&eacute;n deseo donarle ahora?</h2>
 <% end %>
-
+<div data-position="fixed" data-theme="b" data-role="navbar">
+	<ul id="groupby-tabs">
+		<li><a href="#alumnos" class="ui-btn-active">Alumnos</a></li>
+		<li><a href="#equipos">Equipos</a></li>
+		<li><a href="#grupos">Grupos</a></li>
+	</ul>
+</div><!-- /navbar -->
 <%= form_tag students_path,:id=>'search-donor-form', :method => 'get' do %>
      <input type="search" placeholder="Ingresar nombre o apellido.." id="search" name="search" />
 <% end %>
 
-<ul data-role="listview" data-theme="c">
+<ul id="alumnos" class="tab-content" data-role="listview" data-theme="c">
 	<% @students.each do |student| %>
     <% if params[:withdraw] %>
       <li><%= link_to "#{student.complete_name}", make_withdraw_student_path(student) %></li>
@@ -17,4 +23,13 @@
     <% end %>
   <% end %>
 </ul>
+
+<ul id="equipos"  class="tab-content"  class="hidden" data-role="listview" data-theme="c">
+	<li>Equipos</li>
+</ul>
+
+<ul id="grupos"  class="tab-content"  class="hidden" data-role="listview" data-theme="c">
+	<li>Grupos</li>
+</ul>
+
 

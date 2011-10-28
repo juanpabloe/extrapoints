@@ -90,5 +90,9 @@ class StudentsController < ApplicationController
   def check_todays_bdays
     @bday_students = Student.where("strftime('%m-%d', dob) = ?", Time.new.strftime('%m-%d'))
   end
+  
+  def check_todays_bdays
+    @bday_students = Student.where("strftime('%m-%d', dob) = ?", Time.new.strftime('%m-%d'))
+  end
 
 end

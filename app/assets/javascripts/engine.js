@@ -46,6 +46,19 @@ $(document).ready(function() {
 		  }
 		})
 	});
+	
+	$(".tab-content").hide();
+	$("#alumnos").show();
+	//Change tabs in search view
+	$('a',"#groupby-tabs").click(function(e) {
+		e.preventDefault();
+		$("#groupby-tabs a").removeClass("ui-btn-active");
+		$(this).addClass("ui-btn-active");
+		$(".tab-content").hide();
+		var activeTab = $(this).attr("href");
+		$(activeTab).show();
+		return false;
+	});
 
 });
 

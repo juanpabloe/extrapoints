@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  
+  before_filter :validate_current_session
 
   helper_method :current_user
 
@@ -11,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  
+  def validate_current_session
+  	User.is_user_active?(session[:user_id])
   end
 
 end
