@@ -1,7 +1,7 @@
 # Rake task para insertar en BD a los users de ExtraPoints
 require 'csv'
 
-puts "Hola"
+puts "Aqui no mas actualizando la BD ;)"
 
 User.delete_all
 
