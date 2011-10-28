@@ -102,22 +102,18 @@ function mandaRegalo(premio) {
 			case 1:
 				$("#donation_amount").val(100);
 				$("#new_donation").submit();
-				alert(1);
 			break;
 			case 2:
 				$("#donation_amount").val(200);
 				$("#new_donation").submit();
-				alert(2);
 			break;
 			case 3:
 				$("#donation_amount").val(300);
 				$("#new_donation").submit();
-				alert(3);
 			break;
 			case 4:
 				$("#donation_amount").val(500);
 				$("#new_donation").submit();
-				alert(4);
 			break;
 			default:
 				return false;
