@@ -20,15 +20,20 @@ class UsersController < ApplicationController
   def history
     @user = User.find(params[:id])
     history = User.get_history(@user.id)
+    @operations = detect_records(history)
+  end
+
+  #Metodo para detectar si el historial de transacciones es trae mas de un record
+  def detect_records(history)
     if history.class.name == "Array"
     	history = history.reverse
-    	@operations = parse_history_result_multiple(history)
+    	operations = parse_history_result_multiple(history)
     elsif history.class.name == "String"
-    	@operations = parse_history_result_singular(history)
+    	operations = parse_history_result_singular(history)
     end
-    @operations
+    operations
   end
-  
+
   #Método para parsear el resultado obtenido por el web service de get history
   #TODO cambiar el finalArray por un hash para poder establecer como llaves lo que es cada atributo
   def parse_history_result_multiple (array)
@@ -49,7 +54,9 @@ class UsersController < ApplicationController
 			created_at = Time.local(fecha_separada[0],fecha_separada[1],fecha_separada[2],
 															tiempo_separado[0],tiempo_separado[1],tiempo_separado[2])
 			records[index]['created_at'] = created_at
-			records[index]['complete_name'] = User.find_by_username(records[index]['user']).complete_name
+      u = User.find_by_username(records[index]['user'])
+			records[index]['complete_name'] = u.complete_name
+      records[index]['points'] = u.points
 		end
 		records
   end
@@ -71,8 +78,9 @@ class UsersController < ApplicationController
 			created_at = Time.local(fecha_separada[0],fecha_separada[1],fecha_separada[2],
 															tiempo_separado[0],tiempo_separado[1],tiempo_separado[2])
 			records[index]['created_at'] = created_at
-			u = User.find_by_username(records[index]['user'])
-			records[index]['complete_name'] = User.find_by_username(records[index]['user']).complete_name
+      u = User.find_by_username(records[index]['user'])
+			records[index]['complete_name'] = u.complete_name
+      records[index]['points'] = u.points
 		end
 		records
   end

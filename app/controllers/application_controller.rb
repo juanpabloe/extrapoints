@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
   
   def validate_current_session
-  	User.is_user_active?(session[:user_id])
+  	User.is_user_active?(session[:user_id]) if session[:user_id]
   end
 
   def notifications

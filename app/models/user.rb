@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   def self.get_history(user_id)
     client = Savon::Client.new(MOBILE_MONEY)
     response = client.request :wsdl, :get_history do
-      soap.body = "<startDate>2011-09-23</startDate><endDate>#{Time.new.strftime("%Y-%m-%d")}</endDate><userId>#{user_id}</userId>"
+      soap.body = "<startDate>2011-10-25</startDate><endDate>#{Time.new.strftime("%Y-%m-%d")}</endDate><userId>#{user_id}</userId>"
     end
     #Regresa un arreglo de strings en el cual cada uno es un record del historial
     Hash.from_xml(response.to_xml)["Envelope"]["Body"]["resMessage"]["result"]
