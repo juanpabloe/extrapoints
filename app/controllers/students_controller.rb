@@ -1,7 +1,5 @@
 class StudentsController < ApplicationController
 
-  before_filter :check_todays_bdays, :only => [:menu]
-
   def index
     @students = Student.search(params[:search]).reject { |student| student.id == current_user.id}
   end
@@ -16,17 +14,11 @@ class StudentsController < ApplicationController
   end
 
   def menu
-    #TODO: Refactorizar este metodo
-    if @bday_students
-      @notification = Notification.create(:concept => "B day")
-      @notification.user = current_user
-      @notification.save
-    end
   end
 
   def make_donation
     @student = Student.find(params[:id])
-    @donation = Donation.new 
+    @donation = Donation.new
   end
 
   def donate
@@ -86,13 +78,4 @@ class StudentsController < ApplicationController
   def update_user_points(user)
       user.update_attributes(:points => User.update_points(user.id))
   end
-
-  def check_todays_bdays
-    @bday_students = Student.where("strftime('%m-%d', dob) = ?", Time.new.strftime('%m-%d'))
-  end
-  
-  def check_todays_bdays
-    @bday_students = Student.where("strftime('%m-%d', dob) = ?", Time.new.strftime('%m-%d'))
-  end
-
 end

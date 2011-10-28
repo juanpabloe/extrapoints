@@ -47,8 +47,7 @@
     	<% if current_user %>
 		  <footer data-role="footer" data-position="fixed" data-theme="c">
 		    <div>
-		    	<%= link_to "#{current_user.notifications.size}", 
-		    				user_notifications_path(current_user), :id=>'notification-number' if current_user.student?%>
+		    	<%= link_to "#{@notifications.size}", notifications_path, :id=>'notification-number' if current_user.student? and @notifications %>
 		      Notificaciones
 		    </div>  
         <div><%= current_user.complete_name -%><%= - current_user.points if current_user.student? %></div>
