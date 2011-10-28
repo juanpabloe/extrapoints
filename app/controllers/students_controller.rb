@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
 
+  before_filter :update_students_points, :only => [:ranking]
+
   def index
     @students = Student.search(params[:search]).reject { |student| student.id == current_user.id}
   end
@@ -9,8 +11,7 @@ class StudentsController < ApplicationController
   end
 
   def ranking
-    # Para actualizar el balance de puntos de cada estudiante por si alguno cambio
-    @students = Student.ordered.limit(10).each { |s| update_user_points(s) }
+    @students = Student.ordered.limit(10)
   end
 
   def menu
@@ -83,4 +84,12 @@ class StudentsController < ApplicationController
   def update_user_points(user)
       user.update_attributes(:points => User.update_points(user.id))
   end
+
+  # Para actualizar el balance de puntos de cada estudiante por si alguno cambio
+  def update_students_points
+    Student.all.each do |s|
+      update_user_points(s)
+    end
+  end
+
 end
