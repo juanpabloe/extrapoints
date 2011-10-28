@@ -29,6 +29,7 @@ Extrapoints::Application.routes.draw do
     member do
       get "make_donation"
       get "make_withdraw"
+      get "give_present"
       post "donate"
       post "withdraw"
     end

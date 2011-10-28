@@ -62,6 +62,28 @@ $(document).ready(function() {
 		$(activeTab).show();
 		return false;
 	});
+	
+	//Confirmation box student donation form
+	$('.present').live('vclick', function() {
+		$(this).simpledialog({
+		  'mode' : 'bool',
+		  'prompt' : '¿Estás seguro?',
+		  'buttons' : {
+		  	'SI': {
+		      click: function () {
+		      	mandaRegalo($(this).attr("id"));
+		      }
+		    },
+		    'NO': {
+		      click: function () {
+		      },
+		      icon: "delete",
+		      theme: "c"
+		    }
+		  }
+		})
+	});
+	
 
 });
 
@@ -72,3 +94,34 @@ window.addEventListener("load",function() {
   }, 0);
  
 });
+
+function mandaRegalo(premio) {
+	premio = parseInt(premio);
+	if (premio > 0 && premio < 5) {
+		switch(premio) {
+			case 1:
+				$("#donation_amount").val(100);
+				$("#new_donation").submit();
+				alert(1);
+			break;
+			case 2:
+				$("#donation_amount").val(200);
+				$("#new_donation").submit();
+				alert(2);
+			break;
+			case 3:
+				$("#donation_amount").val(300);
+				$("#new_donation").submit();
+				alert(3);
+			break;
+			case 4:
+				$("#donation_amount").val(500);
+				$("#new_donation").submit();
+				alert(4);
+			break;
+			default:
+				return false;
+			break;
+		}
+	}
+}
