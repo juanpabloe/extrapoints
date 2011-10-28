@@ -15,13 +15,17 @@
 <% end %>
 
 <ul id="alumnos" class="tab-content" data-role="listview" data-theme="c">
-	<% @students.each do |student| %>
-    <% if params[:withdraw] %>
-      <li><%= link_to "#{student.complete_name}", make_withdraw_student_path(student) %></li>
-    <% else %>
-      <li><%= link_to "#{student.complete_name}", make_donation_student_path(student) %></li>
-    <% end %>
-  <% end %>
+	<% if @students %>
+		<% @students.each do |student| %>
+		  <% if params[:withdraw] %>
+		    <li><%= link_to "#{student.complete_name}", make_withdraw_student_path(student) %></li>
+		  <% else %>
+		    <li><%= link_to "#{student.complete_name}", make_donation_student_path(student) %></li>
+		  <% end %>
+		<% end %>
+  <% else %>
+  	<li>No hay resultados</li>
+  <% end%>
 </ul>
 
 <ul id="equipos"  class="tab-content"  class="hidden" data-role="listview" data-theme="c">

@@ -3,6 +3,9 @@ $(document).ready(function() {
 		if (e.keyCode == 45) return false;
 	});
 	
+	$("#new_donation").submit(function() {
+		$("#loading").show();
+	});
 	//Confirmation box student donation form
 	$('#donar_confirm').live('vclick', function() {
 		$(this).simpledialog({

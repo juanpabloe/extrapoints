@@ -347,5 +347,38 @@ h2#title {
 *********************************************SEARCH**********************************************
 ****************************************************************************************************
 ****************************************************************************************************/
+.hidden {
+	display:none;
+}
 
+#container {
+	position:relative;
+}
+#loading {
+	border: 1px solid black;
+	background: #3D3D3D;
+	font-weight: bold;
+	color: white;
+	text-shadow: 0 -1px 1px black;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#333),to(#5a5a5a));
+	background-image: -webkit-linear-gradient(top,#333,#5a5a5a);
+	background-image: -moz-linear-gradient(top,#333,#5a5a5a);
+	background-image: -ms-linear-gradient(top,#333,#5a5a5a);
+	background-image: -o-linear-gradient(top,#333,#5a5a5a);
+	background-image: linear-gradient(top,#333,#5a5a5a);
+	box-shadow: 0 1px 4px rgba(0,0,0,.3);
+	text-align: center;
+	cursor: pointer;
+	position: relative;
+	padding: 5% 10%;
+	-moz-border-radius: 1em;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
+	width:25%;
+	height:25%;
+	position:absolute;
+	top:15%;
+	left:25%;
+	opacity:.8;
+}
 
