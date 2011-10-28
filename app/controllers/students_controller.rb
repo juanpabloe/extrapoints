@@ -1,9 +1,14 @@
 class StudentsController < ApplicationController
 
-  before_filter :update_students_points, :only => [:ranking]
+  after_filter :update_current_user_points, :only => [:withdraw, :donate]
 
   def index
-    @students = Student.search(params[:search]).reject { |student| student.id == current_user.id}
+  	if params[:search]
+    	@students = Student.search(params[:search]).reject { |student| student.id == current_user.id}
+    else
+    	@students = Student.order("first_name ASC")
+    end
+    @students
   end
 
   def show
@@ -91,6 +96,11 @@ class StudentsController < ApplicationController
   #Metodo para sincronizar el balance de puntos del estudiante con la base de datos de los webservices
   def update_user_points(user)
       user.update_attributes(:points => User.update_points(user.id))
+  end
+  
+  #Metodo para sincronizar el balance de puntos del estudiante con la base de datos de los webservices
+  def update_current_user_points()
+      current_user.update_attributes(:points => User.update_points(current_user.id))
   end
 
   # Para actualizar el balance de puntos de cada estudiante por si alguno cambio
