@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
 
+  before_filter :update_students_points, :only => [:ranking]
+
   def index
     @students = Student.search(params[:search]).reject { |student| student.id == current_user.id}
   end
@@ -9,8 +11,7 @@ class StudentsController < ApplicationController
   end
 
   def ranking
-    # Para actualizar el balance de puntos de cada estudiante por si alguno cambio
-    @students = Student.ordered.limit(10).each { |s| update_user_points(s) }
+    @students = Student.ordered.limit(10)
   end
 
   def menu
@@ -45,7 +46,11 @@ class StudentsController < ApplicationController
         redirect_to history_user_path(from_user)
       end
     else
-       redirect_to make_donation_student_path(to_user), :notice => "Verifica los datos ingresados."
+    	if donation_result.eql? "The amount must not be over"
+      	redirect_to make_donation_student_path(to_user), :notice => "Las transacciones deben de ser menores a 200 puntos"
+      else 
+      	redirect_to make_donation_student_path(to_user), :notice => "Verifica los valores ingresados"
+      end
     end
   end
 
@@ -74,7 +79,11 @@ class StudentsController < ApplicationController
         redirect_to history_user_path(from_user)
       end
     else
-       redirect_to make_withdraw_student_path(to_user), :notice => "Verifica los datos ingresados."
+    	if withdraw_result.eql? "Invalid Transaction."
+      	redirect_to make_withdraw_student_path(to_user), :notice => "Las transacciones deben de ser menores a 200 puntos"
+      else 
+      	redirect_to make_withdraw_student_path(to_user), :notice => "Verifica los valores ingresados"
+      end
     end
 
   end
@@ -83,4 +92,12 @@ class StudentsController < ApplicationController
   def update_user_points(user)
       user.update_attributes(:points => User.update_points(user.id))
   end
+
+  # Para actualizar el balance de puntos de cada estudiante por si alguno cambio
+  def update_students_points
+    Student.all.each do |s|
+      update_user_points(s)
+    end
+  end
+
 end

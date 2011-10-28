@@ -22,7 +22,17 @@ class ApplicationController < ActionController::Base
   end
 
   def notifications
-    @notifications ||= Student.where("strftime('%m-%d', dob) = ?", Time.new.strftime('%m-%d'))
+    @notifications ||= get_birthdays
   end
 
+   def get_birthdays
+    students = []
+    Student.all.each do |s|
+      if s.dob.strftime('%m-%d') == Time.new.strftime('%m-%d')
+        students.push(s)
+      end
+    end
+    students
+  end
+ 
 end
