@@ -6,6 +6,14 @@ $(document).ready(function() {
 	$("#new_donation").submit(function() {
 		$("#loading").show();
 	});
+	
+	$("#new_withdraw").submit(function() {
+		$("#loading").show();
+	});
+	
+	$(".menu-icon").click(function() {
+		$("#loading").show();
+	});
 	//Confirmation box student donation form
 	$('#donar_confirm').live('vclick', function() {
 		$(this).simpledialog({

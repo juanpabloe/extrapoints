@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def notifications
+  	dob = 
     @notifications ||= Student.where("strftime('%m-%d', dob) = ?", Time.new.strftime('%m-%d'))
   end
 
