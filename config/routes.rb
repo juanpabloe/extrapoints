@@ -1,6 +1,6 @@
 Extrapoints::Application.routes.draw do
 
-  resources :operations, :donations
+  resources :operations, :donations, :notifications
 
   get "sessions/new"
 
@@ -9,8 +9,8 @@ Extrapoints::Application.routes.draw do
   get "sign_up" => "users#new", :as => "sign_up"
 
   root :to => "sessions#new"
+
   resources :users do
-    resources :notifications
     member do
       get "history"
     end

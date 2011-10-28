@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  before_filter :notifications
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
@@ -11,6 +13,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def notifications
+    @notifications ||= Student.where("strftime('%m-%d', dob) = ?", Time.new.strftime('%m-%d'))
   end
 
 end
