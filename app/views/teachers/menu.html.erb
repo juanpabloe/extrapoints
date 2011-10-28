@@ -1,10 +1,13 @@
 <div data-role="container" id="container">
   <div id="login-form-bg">
     <div id="main-menu">
-      <%= link_to (image_tag "icons/depositar_icon.png"), students_path, :id => 'menu-icon-1' %><br />
-      <%= link_to (image_tag "icons/retirar_icon.png"), students_path(:withdraw => true), :id => 'menu-icon-2' %><br />
-      <%= link_to (image_tag "icons/historial_icon.png"), history_user_path(current_user), :id => 'menu-icon-3' %><br />
-      <%= link_to (image_tag "icons/ranking_icon.png"), ranking_students_path, :id => 'menu-icon-4' %>
+      <%= link_to (image_tag "icons/depositar_icon.png"), students_path, :id => 'menu-icon-1', "class" => "menu-icon" %><br />
+      <%= link_to (image_tag "icons/retirar_icon.png"), students_path(:withdraw => true), :id => 'menu-icon-2', "class" => "menu-icon" %><br />
+      <%= link_to (image_tag "icons/historial_icon.png"), history_user_path(current_user), :id => 'menu-icon-3', "class" => "menu-icon"%><br />
+      <%= link_to (image_tag "icons/ranking_icon.png"), ranking_students_path, :id => 'menu-icon-4', "class" => "menu-icon" %>
     </div>
   </div>
+  <div data-theme="B" id="loading" class="hidden">
+			Cargando...
+	</div>
 </div>

@@ -44,11 +44,13 @@
     	  </div>
     	<% if current_user %>
 		  <footer data-role="footer" data-position="fixed" data-theme="c">
+		  	<% if current_user.student? and @notifications %>
 		    <div>
-		    	<%= link_to "#{@notifications.size}", notifications_path, :id=>'notification-number' if current_user.student? and @notifications %>
+		    	<%= link_to "#{@notifications.size}", notifications_path, :id=>'notification-number' %>
 		      Notificaciones
-		    </div>  
-        <div><%= current_user.complete_name -%><%= - current_user.points if current_user.student? %></div>
+		    </div> 
+		    <% end %> 
+        <div style="float:right"><%= current_user.complete_name -%><%= - current_user.points if current_user.student? %></div>
 		  </footer>
 		  <% end %>
     </div>
