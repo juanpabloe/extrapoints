@@ -1,25 +1,28 @@
 <h2 id="title">Mi Historial</h2>
 <ul id="user-history" data-role="listview" data-theme="c">
-	<% if @operations %>
-	<% @operations.keys.each_with_index do |index| %>
-	  <li>
-	  	  <%= image_tag ("icons/#{@operations[index]['type']}.png"), :class=>@operations[index]['type'] %>
-	  	  <div class="transaction-info">
-	  	     <p class="users"><%= @operations[index]['complete_name'] %><span class="amount"> <%= @operations[index]['amount'].to_i %> puntos</span> </p>
-	  	     <div class="time-place">
-	  	     	<span class="time">
-	  	     		<%= @operations[index]['created_at'].strftime("%d/%m/%Y")%>
-	  	     		-
-	  	     		<%= @operations[index]['created_at'].strftime("%I:%M %p")%>
-	  	     	</span>
-	  	     </div>
-	  	  </div>
-	  </li>
-	<% end %>
-	<% else %>
-		<li>
-			No existen transacciones registradas
-		</li>
-	<% end %>
+  <% if @operations %>
+    <% @operations.keys.each_with_index do |index| %>
+      <li>
+      <%= image_tag ("icons/#{@operations[index]['type']}.png"), :class=>@operations[index]['type'] %>
+      <div class="transaction-info">
+        <p class="users"><%= @operations[index]['complete_name'] %><span class="amount"> <%= @operations[index]['amount'].to_i %> puntos</span>.</p>
+        <% if current_user.teacher? %>
+          <p class="users">Su balance queda en <%= @operations[index]['points'].to_i %>. </p>
+        <% end %>
+        <div class="time-place">
+          <span class="time">
+            <%= @operations[index]['created_at'].strftime("%d/%m/%Y")%>
+            -
+            <%= @operations[index]['created_at'].strftime("%I:%M %p")%>
+          </span>
+        </div>
+      </div>
+      </li>
+    <% end %>
+  <% else %>
+    <li>
+    No existen transacciones registradas
+    </li>
+  <% end %>
 </ul>
 
