@@ -20,6 +20,11 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @donation = Donation.new
   end
+  
+  def give_present
+    @student = Student.find(params[:id])
+    @donation = Donation.new
+  end
 
   def donate
     from_user = User.find(session[:user_id])

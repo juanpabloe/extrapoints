@@ -1,0 +1,34 @@
+<h2 id="title">Elige el regalo que desees mandar</h2>
+<% if flash[:warning] or flash[:notice] %>
+  <div id="notice" <% if flash[:warning] %>class="warning"<% end %>>
+	 <%= flash[:warning] || flash[:notice] %>
+  </div>
+<% end %>
+<div id="presents">
+	<div class="present-holder">
+		<%= link_to (image_tag "present1.png"), "#", :id => '1', "class"=>"present" %>
+		<span>100 puntos</span>
+	</div>
+	<div class="present-holder">
+		<%= link_to (image_tag "present2.png"), "#", :id => '2', "class"=>"present" %>
+		<span>200 puntos</span>
+	</div>
+	<div class="present-holder">
+		<%= link_to (image_tag "present3.png"), "#", :id => '3', "class"=>"present" %>
+		<span>300 puntos</span>
+	</div>
+	<div class="present-holder">
+		<%= link_to (image_tag "present4.png"), "#", :id => '4', "class"=>"present" %>
+		<span>500 puntos</span>
+	</div>
+</div>
+
+<%= form_for @donation, :url => donate_student_path(@student) do |f| %>
+  <%= f.hidden_field :amount %>
+  <%= f.hidden_field :description, :value=>'Regalo!!!' %>
+  <%= f.hidden_field :to_user_id, :value => @student.id %>
+<% end %>
+
+<div data-theme="B" id="loading" class="hidden">
+	Enviando...
+</div>
