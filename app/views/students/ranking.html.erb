@@ -4,7 +4,7 @@
       <% @students.each_with_index do |student, index| %>
       <li class="ranking-list-element" >
          <div class="ranking-list-position"># <%= index + 1 %></div>
-         <div class="ranking-list-student"><%= student.first_name %></div>
+         <div class="ranking-list-student"><%= student.complete_name %></div>
          <div class="ranking-list-points"><%= student.points %></div>
       </li>
       <% end %>
