@@ -53,7 +53,7 @@
 		      Notificaciones
 		    </div> 
 		    <% end %> 
-        <div><%= current_user.complete_name -%><%= - current_user.points if current_user.student? %></div>
+        <div><%= current_user.complete_name if current_user -%><%= - current_user.points if current_user.student? %></div>
 		  </footer>
 		  <% end %>
     </div>
