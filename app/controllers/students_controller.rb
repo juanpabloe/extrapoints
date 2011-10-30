@@ -52,7 +52,7 @@ class StudentsController < ApplicationController
       end
     else
     	if donation_result.eql? "The amount must not be over"
-      	redirect_to make_donation_student_path(to_user), :notice => "Las transacciones deben de ser menores a 200 puntos"
+      	redirect_to make_donation_student_path(to_user), :notice => "Las transacciones deben de ser menores a 100 puntos"
       else 
       	redirect_to make_donation_student_path(to_user), :notice => "Verifica los valores ingresados"
       end
@@ -85,7 +85,7 @@ class StudentsController < ApplicationController
       end
     else
     	if withdraw_result.eql? "Invalid Transaction."
-      	redirect_to make_withdraw_student_path(to_user), :notice => "Las transacciones deben de ser menores a 200 puntos"
+      	redirect_to make_withdraw_student_path(to_user), :notice => "Las transacciones deben de ser menores a 100 puntos"
       else 
       	redirect_to make_withdraw_student_path(to_user), :notice => "Verifica los valores ingresados"
       end

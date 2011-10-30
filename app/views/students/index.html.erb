@@ -12,6 +12,7 @@
 </div><!-- /navbar -->
 <%= form_tag students_path,:id=>'search-donor-form', :method => 'get' do %>
      <input type="search" placeholder="Ingresar nombre o apellido.." id="search" name="search" />
+     <%if params[:withdraw]%><input type="hidden" name="withdraw" value="true" /><% end %>
 <% end %>
 
 <ul id="alumnos" class="tab-content" data-role="listview" data-theme="c">

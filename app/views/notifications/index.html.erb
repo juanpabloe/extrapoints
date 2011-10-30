@@ -4,7 +4,7 @@
 <ul data-role="listview" data-theme="c">
 	<% if @notifications %>
 	<% @notifications.each do |student| %>
-      <li><%= link_to "#{student.complete_name}", give_present_student_path(student.id) %></li>
+      <li><%= link_to "#{student.complete_name}", give_present_student_path(student.id)%></li>
   <% end %>
   <% else %>
   	<li>No hay notificaciones</li>

@@ -54,9 +54,11 @@ class UsersController < ApplicationController
 			created_at = Time.local(fecha_separada[0],fecha_separada[1],fecha_separada[2],
 															tiempo_separado[0],tiempo_separado[1],tiempo_separado[2])
 			records[index]['created_at'] = created_at
-      u = User.find_by_username(records[index]['user'])
-			records[index]['complete_name'] = u.complete_name
-      records[index]['points'] = u.points
+      temp_user = User.find_by_username(records[index]['user'])
+      if temp_user
+			records[index]['complete_name'] = temp_user.complete_name
+		   records[index]['points'] = temp_user.points
+      end
 		end
 		records
   end
@@ -78,9 +80,11 @@ class UsersController < ApplicationController
 			created_at = Time.local(fecha_separada[0],fecha_separada[1],fecha_separada[2],
 															tiempo_separado[0],tiempo_separado[1],tiempo_separado[2])
 			records[index]['created_at'] = created_at
-      u = User.find_by_username(records[index]['user'])
-			records[index]['complete_name'] = u.complete_name
-      records[index]['points'] = u.points
+      temp_user = User.find_by_username(records[index]['user'])
+      if temp_user
+			records[index]['complete_name'] = temp_user.complete_name
+		   records[index]['points'] = temp_user.points
+      end
 		end
 		records
   end
