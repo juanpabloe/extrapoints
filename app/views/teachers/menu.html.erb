@@ -1,4 +1,9 @@
 <div data-role="container" id="container">
+<% if flash[:warning] or flash[:notice] %>
+  <div id="notice" <% if flash[:warning] %>class="warning"<% end %>>
+	 <%= flash[:warning] || flash[:notice] %>
+  </div>
+<% end %>
   <div id="login-form-bg">
     <div id="main-menu">
       <%= link_to (image_tag "icons/depositar_icon.png"), students_path, :id => 'menu-icon-1', "class" => "menu-icon" %><br />

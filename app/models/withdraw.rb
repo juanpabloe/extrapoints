@@ -4,6 +4,8 @@ class Withdraw < Operation
 	validates_numericality_of :amount, :greater_than => 0
 	validates_presence_of :description
 
+  attr_accessible :to_user, :from_user
+
   def self.create_wd(teacher_id, teacher_pin, amount)
     client = Savon::Client.new(MOBILE_MONEY)
     response = client.request :wsdl, :create_withdraw do

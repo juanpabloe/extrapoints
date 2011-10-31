@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :validate_current_session
-
   helper_method :current_user
+  helper_method :update_user_points
 
   before_filter :notifications
 
@@ -18,11 +17,16 @@ class ApplicationController < ActionController::Base
   end
   
   def validate_current_session
-  	User.is_user_active?(session[:user_id]) if session[:user_id]
+  	User.is_user_active?(session[:user_id]) if session[:user_id]  
   end
 
   def notifications
     @notifications ||= get_birthdays
+  end
+
+  #Metodo para sincronizar el balance de puntos del estudiante con la base de datos de los webservices
+  def update_user_points(user)
+      user.update_attributes(:points => User.update_points(user.id))
   end
 
    def get_birthdays
