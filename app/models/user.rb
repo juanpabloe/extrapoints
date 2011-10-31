@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :notifications
   has_many :operations, :foreign_key => "to_user_id", :class_name => "Operation"
   has_many :operations, :foreign_key => "from_user_id", :class_name => "Operation"
+  has_many :pretransactions
 
   attr_accessor :password
 
