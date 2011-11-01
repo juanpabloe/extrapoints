@@ -6,7 +6,7 @@ class Student < User
   
   attr_accessible :group_id,:team_id
 
-  scope :ordered, order("points DESC")
+  scope :ordered, order("points DESC, first_name ASC")
 
   def self.search(search)
     if search
