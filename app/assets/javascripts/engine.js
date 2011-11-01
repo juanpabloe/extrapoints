@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$('#loading').hide();
 	$("#new_donation").bind("keypress", function(e) {
 		if (e.keyCode == 45) return false;
 	});
@@ -35,6 +36,7 @@ $(document).ready(function() {
 		  }
 		})
 	});
+	
 	
 	//Confirmation box teacher withdrawal form
 	$('#withdrawal_confirm').live('vclick', function() {
@@ -94,13 +96,11 @@ $(document).ready(function() {
 	
 });
 
-window.addEventListener("load",function() {
-  setTimeout(function(){
-    // Esconde la barra de dirección
-    window.scrollTo(0, 1);
-  }, 0);
- 
-});
+window.addEventListener('load', function(e) {
+    setTimeout(function() { window.scrollTo(0, 1); }, 1);
+  }, false);
+  
+);
 
 function mandaRegalo(premio) {
 	premio = parseInt(premio);

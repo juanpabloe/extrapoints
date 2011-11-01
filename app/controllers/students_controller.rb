@@ -18,7 +18,7 @@ class StudentsController < ApplicationController
   end
 
   def ranking
-    @students = Student.ordered.limit(10)
+    @students = Student.ordered
   end
 
   def menu
