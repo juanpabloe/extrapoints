@@ -100,7 +100,6 @@ window.addEventListener('load', function(e) {
     setTimeout(function() { window.scrollTo(0, 1); }, 1);
   }, false);
   
-);
 
 function mandaRegalo(premio) {
 	premio = parseInt(premio);
