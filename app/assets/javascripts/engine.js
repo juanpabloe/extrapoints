@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	$('#loading').hide();
 	$("#new_donation").bind("keypress", function(e) {
 		if (e.keyCode == 45) return false;
 	});
@@ -48,7 +47,7 @@ $(document).ready(function() {
 		})
 	});
 	
-	$(".tab-content").hide();
+	/*$(".tab-content").hide();
 	$("#alumnos").show();
 	//Change tabs in search view
 	$('a',"#groupby-tabs").click(function(e) {
@@ -59,7 +58,7 @@ $(document).ready(function() {
 		var activeTab = $(this).attr("href");
 		$(activeTab).show();
 		return false;
-	});
+	});*/
 	
 	//Confirmation box student donation form
 	$('.present').live('vclick', function() {
@@ -91,7 +90,7 @@ $(document).ready(function() {
 	
 	$("#make-multiple-donation").click(function() {
 	   var students_to_receive = new Array();
-	   $('.selected',"#alumnos").each(function(index) {
+	   $('.selected',"#alumnos-multiple").each(function(index) {
           students_to_receive.push($(this).attr('id'));
       });   
       console.log(students_to_receive);
