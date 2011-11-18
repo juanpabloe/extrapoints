@@ -23,14 +23,7 @@
 		<%= javascript_include_tag "engine", "custom-jquery.mobile" %>
 		<script src="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.js"></script>
 		<%= javascript_include_tag "jquery.mobile.simpledialog.min" %>
-		
-		<script type="text/javascript">	
-		 	function invalidateBackCache() {
-				  // necessary for Safari: mobile & desktop
-			 }
 
-			 window.addEventListener("unload", invalidateBackCache, false);
-		</script>
 		
     <%= csrf_meta_tag %>
     <%= yield(:head) %>
