@@ -95,8 +95,7 @@ $(document).ready(function() {
 	   $('.selected',"#alumnos-multiple").each(function(index) {
           students_to_receive.push($(this).attr('id'));
       });   
-      console.log(students_to_receive);
-      $.post("/donations/multiple", { students_to_receive} );
+      $.post("/donations/multiple", { 'students[]': [students_to_receive] });
 	});
 	
 });
