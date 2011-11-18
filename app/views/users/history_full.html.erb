@@ -6,7 +6,7 @@
       <%= image_tag ("icons/#{operation.type}.png"), :class => operation.type %>
       <div class="transaction-info">
         <p class="users"><%= operation.to_user.complete_name %><span class="amount"> <%= operation.amount %> puntos</span>.</p>
-        <p class="users">Su balance queda en <%= operation.to_user.points %>. </p>
+        <p class="users"><%= operation.description %>. </p>
         <div class="time-place">
           <span class="time">
             <%= operation.created_at.strftime("%d/%m/%Y")%>
