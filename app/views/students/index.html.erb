@@ -3,6 +3,11 @@
 <% else %>
   <h2 id="title">Mmmm... &iquest;A qui&eacute;n deseo donarle ahora?</h2>
 <% end %>
+<% if flash[:warning] or flash[:notice] %>
+  <div id="notice" <% if flash[:warning] %>class="warning"<% end %>>
+	 <%= flash[:warning] || flash[:notice] %>
+  </div>
+<% end %>
 <div data-position="fixed" data-theme="b" data-role="navbar">
 	<ul id="groupby-tabs">
 		<li><a href="#alumnos" class="ui-btn-active">Alumnos</a></li>

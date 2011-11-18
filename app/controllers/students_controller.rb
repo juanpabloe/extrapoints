@@ -3,6 +3,7 @@ class StudentsController < ApplicationController
   after_filter :update_current_user_points, :only => [:withdraw, :donate]
   before_filter :confirm_withdrawals, :only => [:menu]
   before_filter :update_current_user_points, :only => [:menu]
+  before_filter :same_user?, :only => [:make_donation]
 
   def index
   	if params[:search]
@@ -31,7 +32,11 @@ class StudentsController < ApplicationController
   
   def give_present
     @student = Student.find(params[:id])
-    @donation = Donation.new
+    if is_bday?(@student)
+      @donation = Donation.new
+    else
+      redirect_to menu_students_path
+    end
   end
 
   def donate

@@ -38,5 +38,15 @@ class ApplicationController < ActionController::Base
     end
     students
   end
+
+  def is_bday?(student)
+    student.dob.strftime('%m-%d') == Time.new.strftime('%m-%d')
+  end
+
+  def same_user?
+    if params[:id].to_i == current_user.id
+      redirect_to students_path, :notice => "No te puedes realizar donaciones a ti."
+    end
+  end
  
 end

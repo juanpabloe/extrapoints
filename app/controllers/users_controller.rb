@@ -23,6 +23,11 @@ class UsersController < ApplicationController
     @operations = detect_records(history)
   end
 
+  def history_full
+    @user = User.find(params[:id])
+    @operations = @user.operations
+  end    
+
   #Metodo para detectar si el historial de transacciones es trae mas de un record
   def detect_records(history)
     if history.class.name == "Array"

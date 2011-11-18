@@ -1,0 +1,25 @@
+<h2 id="title">Mi Historial</h2>
+<ul id="user-history" data-role="listview" data-theme="c">
+  <% if @operations %>
+    <% @operations.each do |operation| %>
+      <li>
+      <%= image_tag ("icons/#{operation.type}.png"), :class => operation.type %>
+      <div class="transaction-info">
+        <p class="users"><%= operation.to_user.complete_name %><span class="amount"> <%= operation.amount %> puntos</span>.</p>
+        <p class="users">Su balance queda en <%= operation.to_user.points %>. </p>
+        <div class="time-place">
+          <span class="time">
+            <%= operation.created_at.strftime("%d/%m/%Y")%>
+            -
+            <%= operation.created_at.strftime("%I:%M %p")%>
+          </span>
+        </div>
+      </div>
+      </li>
+    <% end %>
+  <% else %>
+    <li>
+    No existen transacciones registradas
+    </li>
+  <% end %>
+</ul>

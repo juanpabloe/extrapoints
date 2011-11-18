@@ -13,6 +13,7 @@ Extrapoints::Application.routes.draw do
   resources :users do
     member do
       get "history"
+      get "history_full"
     end
   end
   resources :sessions
