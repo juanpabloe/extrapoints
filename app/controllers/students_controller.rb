@@ -30,6 +30,10 @@ class StudentsController < ApplicationController
     @donation = Donation.new
   end
   
+  def multiple_donation
+    @students = Student.find(cookies[:students])
+  end
+  
   def give_present
     @student = Student.find(params[:id])
     if is_bday?(@student)

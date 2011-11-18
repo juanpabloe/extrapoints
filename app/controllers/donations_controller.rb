@@ -8,4 +8,9 @@ class DonationsController < ApplicationController
     @donation = Donation.new
   end
 
+  def multiple
+    cookies[:students] = params[:students]
+    redirect_to multiple_donation_students_path
+  end
+
 end
