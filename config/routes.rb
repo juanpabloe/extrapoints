@@ -27,6 +27,7 @@ Extrapoints::Application.routes.draw do
       get "ranking"
       get "menu"
       get "make_donation_multiple"
+      get "list_multiple"
       post "donate_multiple"
     end
     member do

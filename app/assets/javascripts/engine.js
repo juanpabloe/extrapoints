@@ -3,18 +3,6 @@ $(document).ready(function() {
 	$("#new_donation").bind("keypress", function(e) {
 		if (e.keyCode == 45) return false;
 	});
-	
-	$("#new_donation").submit(function() {
-		$("#loading").show();
-	});
-	
-	$("#new_withdraw").submit(function() {
-		$("#loading").show();
-	});
-	
-	$(".menu-icon").click(function() {
-		$("#loading").show();
-	});
 	//Confirmation box student donation form
 	$('#donar_confirm').live('vclick', function() {
 		$(this).simpledialog({

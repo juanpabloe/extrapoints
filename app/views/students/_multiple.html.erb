@@ -1,0 +1,16 @@
+<ul id="alumnos-multiple" class="tab-content" data-role="listview" data-theme="c">
+  <% if students %>
+    <% students.each do |student| %>
+      <% if params[:withdraw] %>
+        <li id="<%= student.id%>-<%= student.complete-name%>">
+        <span class="student-name"><%= student.complete_name %></span> <button class="donate-selection">Seleccionar</button>
+      <% else %>
+        <li id="<%= student.id%>">
+        <span class="student-name"><%= student.complete_name %></span> <button class="donate-selection">Seleccionar</button>
+        </li>
+      <% end %>
+    <% end %>
+  <% else %>
+    <li>No hay resultados</li>
+  <% end%>
+</ul>
