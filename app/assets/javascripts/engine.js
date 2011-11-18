@@ -3,10 +3,11 @@ $(document).ready(function() {
 		if (e.keyCode == 45) return false;
 	});
 	//Confirmation box student donation form
-	$('#donar_confirm').live('vclick', function() {
+	$('#donar_confirm').live('click', function() {
 		$(this).simpledialog({
 		  'mode' : 'bool',
 		  'prompt' : '¿Estás seguro?',
+		  'useModal': true,
 		  'buttons' : {
 		  	'SI': {
 		      click: function () {
@@ -26,10 +27,11 @@ $(document).ready(function() {
 	
 	
 	//Confirmation box teacher withdrawal form
-	$('#withdrawal_confirm').live('vclick', function() {
+	$('#withdrawal_confirm').live('click', function() {
 		$(this).simpledialog({
 		  'mode' : 'bool',
 		  'prompt' : '¿Estás seguro?',
+		  'useModal': true,
 		  'buttons' : {
 		  	'SI': {
 		      click: function () {
@@ -94,7 +96,7 @@ $(document).ready(function() {
           students_to_receive.push($(this).attr('id'));
       });   
       console.log(students_to_receive);
-      
+      $.post("/donations/multiple", { students_to_receive} );
 	});
 	
 });

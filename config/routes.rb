@@ -1,6 +1,6 @@
 Extrapoints::Application.routes.draw do
 
-  resources :operations, :donations, :notifications
+  resources :operations, :notifications
 
   get "sessions/new"
 
@@ -37,5 +37,10 @@ Extrapoints::Application.routes.draw do
       post "donate"
       post "withdraw"
     end
+  end
+  resources :donations do
+   collection do
+      post "multiple"
+   end
   end
 end
