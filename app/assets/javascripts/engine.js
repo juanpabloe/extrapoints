@@ -94,6 +94,22 @@ $(document).ready(function() {
 		})
 	});
 	
+	$(".donate-selection").click(function() {
+	   $(this).parent().parent().toggleClass('selected') ;
+	   var objWithText = $(this).prev().children(':first-child');
+	   var text = $(objWithText).text();
+	   $(objWithText).text(text == "Seleccionar" ? "Deseleccionar" : "Seleccionar");
+	});
+	
+	$("#make-multiple-donation").click(function() {
+	   var students_to_receive = new Array();
+	   $('.selected',"#alumnos").each(function(index) {
+          students_to_receive.push($(this).attr('id'));
+      });   
+      console.log(students_to_receive);
+      
+	});
+	
 });
 
 window.addEventListener('load', function(e) {
