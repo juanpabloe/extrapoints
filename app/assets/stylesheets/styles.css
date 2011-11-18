@@ -284,6 +284,9 @@ h2#title {
 #search-donor-form #search.active {
 	color:#000;
 }
+.ui-listview-filter {
+   margin:0 !important;
+}
 
 #new_donation,
 #new_withdraw {
