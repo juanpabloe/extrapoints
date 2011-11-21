@@ -19,15 +19,6 @@ class StudentsController < ApplicationController
 
   def menu
   end
-  
-  def give_present
-    @student = Student.find(params[:id])
-    if is_bday?(@student)
-      @donation = Donation.new
-    else
-      redirect_to menu_students_path
-    end
-  end
 
   private
   

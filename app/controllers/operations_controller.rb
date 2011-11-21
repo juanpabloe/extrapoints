@@ -18,6 +18,15 @@ class OperationsController < ApplicationController
     end
   end
 
+  def give_present
+    @student = Student.find(params[:to_student])
+    if is_bday?(@student)
+      @operation = Operation.new(:op_type => "donation")
+    else
+      redirect_to menu_students_path
+    end
+  end
+
   def create
     @operation = Operation.new(params[:operation])
     to_user = Student.find(params[:operation][:to_user_id])

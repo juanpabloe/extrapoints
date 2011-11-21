@@ -25,21 +25,6 @@ $(document).ready(function() {
 		})
 	});
 	
-	
-	
-	/*$(".tab-content").hide();
-	$("#alumnos").show();
-	//Change tabs in search view
-	$('a',"#groupby-tabs").click(function(e) {
-		e.preventDefault();
-		$("#groupby-tabs a").removeClass("ui-btn-active");
-		$(this).addClass("ui-btn-active");
-		$(".tab-content").hide();
-		var activeTab = $(this).attr("href");
-		$(activeTab).show();
-		return false;
-	});*/
-	
 	//Confirmation box student donation form
 	$('.present').live('vclick', function() {
 		$(this).simpledialog({
@@ -91,19 +76,19 @@ function mandaRegalo(premio) {
 	if (premio > 0 && premio < 5) {
 		switch(premio) {
 			case 1:
-				$("#donation_amount").val(10);
+				$("#operation_amount").val(10);
 				$("#new_operation").submit();
 			break;
 			case 2:
-				$("#donation_amount").val(20);
+				$("#operation_amount").val(20);
 				$("#new_operation").submit();
 			break;
 			case 3:
-				$("#donation_amount").val(30);
+				$("#operation_amount").val(30);
 				$("#new_operation").submit();
 			break;
 			case 4:
-				$("#donation_amount").val(50);
+				$("#operation_amount").val(50);
 				$("#new_operation").submit();
 			break;
 			default:

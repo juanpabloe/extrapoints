@@ -11,10 +11,13 @@ Extrapoints::Application.routes.draw do
   root :to => "sessions#new"
 
   resources :users do
-    resources :operations
+    resources :operations do
+      collection do
+        get "give_present"        
+      end
+    end
     member do
       get "history"
-      get "history_full"
     end
   end
   resources :sessions
@@ -27,21 +30,6 @@ Extrapoints::Application.routes.draw do
     collection do
       get "ranking"
       get "menu"
-      get "list_multiple"
-      post "donate_multiple"
-      get "multiple_donation"
     end
-    member do
-      get "make_donation"
-      get "make_withdraw"
-      get "give_present"
-      post "donate"
-      post "withdraw"
-    end
-  end
-  resources :donations do
-   collection do
-      post "multiple"
-   end
   end
 end
