@@ -1,1 +1,20 @@
+<% if @operation.op_type == "donation" %>
+  <h2 id="title">Nueva donaci&oacute;n</h2>
+<% else %>
+  <h2 id="title">Nuevo retiro</h2>
+<% end %>
 
+<% if flash[:warning] or flash[:notice] %>
+  <div id="notice" <% if flash[:warning] %>class="warning"<% end %>>
+	 <%= flash[:warning] || flash[:notice] %>
+  </div>
+<% end %>
+
+<%= form_for @operation, :url => { :action => :create } do |f| %>
+  <%= f.text_field :to, :value=>@student.complete_name, :readonly => true %>
+  <%= f.number_field :amount, :placeholder=>'Puntos...', :min=>'1', :max=>'100', :class=>"required"%>
+  <%= f.text_field :description, :placeholder=>'Concepto...', :class=>"required" %>
+  <%= f.hidden_field :to_user_id, :value => @student.id %>
+  <%= f.hidden_field :op_type, :value => @operation.op_type %>
+  <a id="operation_confirm" data-role="button">Realizar operaci&oacute;n</a>
+<% end %>

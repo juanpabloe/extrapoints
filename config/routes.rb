@@ -1,6 +1,6 @@
 Extrapoints::Application.routes.draw do
 
-  resources :operations, :notifications
+  resources :notifications
 
   get "sessions/new"
 
@@ -11,6 +11,7 @@ Extrapoints::Application.routes.draw do
   root :to => "sessions#new"
 
   resources :users do
+    resources :operations
     member do
       get "history"
       get "history_full"

@@ -1,13 +1,9 @@
 <ul id="alumnos" class="tab-content" data-role="listview" data-theme="c" data-filter="true">
   <% if students %>
     <% students.each do |student| %>
-      <% if params[:withdraw] %>
-        <li><%= link_to "#{student.complete_name}", make_withdraw_student_path(student) %></li>
-      <% else %>
-        <li>
-        <%= link_to "#{student.complete_name}", make_donation_student_path(student)%>
-        </li>
-      <% end %>
+      <li>
+      <%= link_to "#{student.complete_name}", new_user_operation_path(current_user, :to_student => student.id, :operation => params[:operation]) %>
+      </li>
     <% end %>
   <% else %>
     <li>No hay resultados</li>

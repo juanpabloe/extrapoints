@@ -1,3 +1,26 @@
-<h1>Todas las operaciones</h1>
-
-<%= link_to 'Back', students_path %>
+<h2 id="title">Mi Historial</h2>
+<ul id="user-history" data-role="listview" data-theme="c">
+  <% if @operations %>
+    <% @operations.each do |operation| %>
+      <li>
+      <%= image_tag ("icons/#{operation.op_type}.png"), :class => operation.op_type %>
+      <div class="transaction-info">
+        <p class="users"><%= operation.to_user.complete_name %><span class="amount"> <%= operation.amount %> puntos</span>.</p>
+        <p class="users"><%= operation.description %>. </p>
+        <p class="users">Puntos restantes: <%= operation.after_balance %>. </p>
+        <div class="time-place">
+          <span class="time">
+            <%= operation.created_at.strftime("%d/%m/%Y")%>
+            -
+            <%= operation.created_at.strftime("%I:%M %p")%>
+          </span>
+        </div>
+      </div>
+      </li>
+    <% end %>
+  <% else %>
+    <li>
+    No existen transacciones registradas
+    </li>
+  <% end %>
+</ul>

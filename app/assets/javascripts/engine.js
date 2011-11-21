@@ -1,9 +1,9 @@
 $(document).ready(function() {
-	$("#new_donation").bind("keypress", function(e) {
+	$("#new_operation").bind("keypress", function(e) {
 		if (e.keyCode == 45) return false;
 	});
 	//Confirmation box student donation form
-	$('#donar_confirm').live('click', function() {
+	$('#operation_confirm').live('click', function() {
 		$(this).simpledialog({
 		  'mode' : 'bool',
 		  'prompt' : '¿Estás seguro?',
@@ -12,7 +12,7 @@ $(document).ready(function() {
 		  	'SI': {
 		      click: function () {
 		      	$('.ui-btn-text',this).text('Enviando...');
-		        $("#new_donation").submit();
+		        $("#new_operation").submit();
 		      }
 		    },
 		    'NO': {
@@ -26,28 +26,6 @@ $(document).ready(function() {
 	});
 	
 	
-	//Confirmation box teacher withdrawal form
-	$('#withdrawal_confirm').live('click', function() {
-		$(this).simpledialog({
-		  'mode' : 'bool',
-		  'prompt' : '¿Estás seguro?',
-		  'useModal': true,
-		  'buttons' : {
-		  	'SI': {
-		      click: function () {
-		      	$('.ui-btn-text',this).text('Enviando...');
-		        $("#new_withdraw").submit();
-		      }
-		    },
-		    'NO': {
-		      click: function () {
-		      },
-		      icon: "delete",
-		      theme: "c"
-		    }
-		  }
-		})
-	});
 	
 	/*$(".tab-content").hide();
 	$("#alumnos").show();
@@ -114,19 +92,19 @@ function mandaRegalo(premio) {
 		switch(premio) {
 			case 1:
 				$("#donation_amount").val(10);
-				$("#new_donation").submit();
+				$("#new_operation").submit();
 			break;
 			case 2:
 				$("#donation_amount").val(20);
-				$("#new_donation").submit();
+				$("#new_operation").submit();
 			break;
 			case 3:
 				$("#donation_amount").val(30);
-				$("#new_donation").submit();
+				$("#new_operation").submit();
 			break;
 			case 4:
 				$("#donation_amount").val(50);
-				$("#new_donation").submit();
+				$("#new_operation").submit();
 			break;
 			default:
 				return false;

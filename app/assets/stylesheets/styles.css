@@ -288,26 +288,22 @@ h2#title {
    margin:0 !important;
 }
 
-#new_donation,
-#new_withdraw {
+#new_operation {
 	margin:10px;
 }
 
-#new_donation #donation_to,
-#new_withdraw #withdraw_to {
+#new_operation #operation_to {
 	background:url('icons/user_icon.png') no-repeat left #F0F0F0 ;
 	padding:.4em .3em .4em 1.7em
 }
 
 
-#new_donation #donation_amount,
-#new_withdraw #withdraw_amount {
+#new_operation #operation_amount {
 	background:url('icons/coins_icons.png') no-repeat left #F0F0F0 ;
 	padding:.4em .3em .4em 1.7em
 }
 
-#new_donation #donation_description ,
-#new_withdraw #withdraw_description {
+#new_operation #operation_description {
 	background:url('icons/notebook-icon.png') no-repeat left #F0F0F0 ;
 	padding:.4em .3em .4em 1.7em
 }
