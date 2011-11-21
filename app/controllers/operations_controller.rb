@@ -43,30 +43,47 @@ class OperationsController < ApplicationController
   
   def create_multiple
   	to_users = Student.find(session[:to_students])
-  	to_users.each do |user|
-  		operation = Operation.new(:amount => params[:operation_amount],
-  															:description => params[:operation_description],
-  															:op_type => session[:op_type], 
-  															:to_user_id => user.id)
-  		donation_result = Operation.new_donation(current_user.id, params[:operation_amount], current_user.pin, user.username)
-  		# Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
-      if donation_result.eql? "Your current balance is now"
-        operation.from_user = current_user
-        operation.after_balance = user.points + operation.amount
-        if operation.save
-          update_user_points(user)
-        end
-      else
-        if donation_result.eql? "The amount must not be over"
-          redirect_to new_multiple_user_operations_path(current_user),
-            :notice => "Las transacciones deben de ser menores a 100 puntos"
-        else
-          redirect_to new_multiple_user_operations_path(current_user), 
-            :notice => "Verifica los valores ingresados"
-        end
-      end 
-  	end
-  	update_user_points(current_user)
+  	if session[:op_type] == 'donation'
+			to_users.each do |user|
+				operation = Operation.new(:amount => params[:operation_amount],
+																	:description => params[:operation_description],
+																	:op_type => session[:op_type], 
+																	:to_user_id => user.id)
+				donation_result = Operation.new_donation(current_user.id, params[:operation_amount], current_user.pin, user.username)
+				# Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
+		    if donation_result.eql? "Your current balance is now"
+		      operation.from_user = current_user
+		      operation.after_balance = user.points + operation.amount
+		      if operation.save
+		        update_user_points(user)
+		      end
+		    else
+		      if donation_result.eql? "The amount must not be over"
+		        redirect_to new_multiple_user_operations_path(current_user),
+		          :notice => "Las transacciones deben de ser menores a 100 puntos"
+		      else
+		        redirect_to new_multiple_user_operations_path(current_user), 
+		          :notice => "Verifica los valores ingresados"
+		      end
+		    end 
+			end
+	  elsif session[:op_type] == 'withdraw'
+		  to_users.each do |user|
+				#Llama al webservice													
+			 	transaction = Operation.new_withdraw(current_user.id, current_user.pin, params[:operation_amount]).to_i 
+
+				if Pretransaction.create!(:transaction_id => transaction,
+				                          :user_id => user.id,
+				                          :user_pin => user.pin,
+				                          :amount => params[:operation_amount],
+				                          :from_user => current_user.id,
+				                          :description => params[:operation_description])
+				else 
+				    redirect_to new_multiple_user_operations_path(current_user), 
+		          :notice => "Verifica los valores ingresados"
+				end 	
+		  end
+	  end #se acaba withdra
   	redirect_to user_operations_path(current_user)
   end
 
@@ -111,7 +128,6 @@ class OperationsController < ApplicationController
             :notice => "Verifica los valores ingresados"
       end
     end
-
   end
 
 end
