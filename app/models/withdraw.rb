@@ -1,4 +1,0 @@
-class Withdraw < Operation
-
-
-end

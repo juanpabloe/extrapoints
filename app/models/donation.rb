@@ -1,4 +1,0 @@
-class Donation < Operation
-
-
-end
