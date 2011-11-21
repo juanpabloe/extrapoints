@@ -292,18 +292,18 @@ h2#title {
 	margin:10px;
 }
 
-#new_operation #operation_to {
+#operation_to {
 	background:url('icons/user_icon.png') no-repeat left #F0F0F0 ;
 	padding:.4em .3em .4em 1.7em
 }
 
 
-#new_operation #operation_amount {
+#operation_amount {
 	background:url('icons/coins_icons.png') no-repeat left #F0F0F0 ;
 	padding:.4em .3em .4em 1.7em
 }
 
-#new_operation #operation_description {
+#operation_description {
 	background:url('icons/notebook-icon.png') no-repeat left #F0F0F0 ;
 	padding:.4em .3em .4em 1.7em
 }
@@ -354,14 +354,6 @@ h2#title {
 	position:relative;
 }
 
-#alumnos-multiple li {
-   overflow: auto;
-}
-#alumnos-multiple .ui-btn {
-   display:inline-block;
-   margin: 0;
-   float: right;
-}
 
 #alumnos-multiple .selected {
    	text-shadow: 0 -1px 1px black;

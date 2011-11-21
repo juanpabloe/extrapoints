@@ -1,16 +1,28 @@
-<ul id="alumnos-multiple" class="tab-content" data-role="listview" data-theme="c"  data-filter="true">
-  <% if students %>
-    <% students.each do |student| %>
-      <% if params[:withdraw] %>
-        <li id="<%= student.id%>-<%= student.complete-name%>">
-        <span class="student-name"><%= student.complete_name %></span> <button class="donate-selection">Seleccionar</button>
-      <% else %>
-        <li id="<%= student.id%>">
-        <span class="student-name"><%= student.complete_name %></span> <button class="donate-selection">Seleccionar</button>
-        </li>
-      <% end %>
-    <% end %>
-  <% else %>
-    <li>No hay resultados</li>
-  <% end%>
-</ul>
+<%= form_tag(multiple_user_operations_path(current_user,:operation => params[:operation]), :method => "post") do %>
+	<fieldset class="ui-grid-a">
+		<div class="">
+		<% if params[:withdraw] %>
+		  <button type="submit" data-theme="c">Retirar a seleccionados</button>
+		<% else %>
+		  <button type="submit" data-theme="c">Donar a seleccionados</button>
+		<% end%>
+		</div>     
+	</fieldset>
+	<div data-role="controlgroup">
+		<ul id="alumnos-multiple" class="tab-content" data-role="listview" data-theme="c"  data-filter="true">
+			<% if students %>
+				<% students.each_with_index do |student,index| %>
+					<li>
+						<input data-theme="c" type="checkbox" value="<%= student.id%>" name="to_students[]" id="alum-<%= index %>" class="custom" />
+						<label data-theme="c" for="alum-<%= index %>"><%= student.complete_name %></label>
+					</li>
+				<% end %>
+			<% else %>
+				<li>No hay resultados</li>
+			<% end%>
+		</ul>
+	</div>  	
+<% end %>
+
+
+

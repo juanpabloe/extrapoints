@@ -8,16 +8,6 @@
     <%= flash[:warning] || flash[:notice] %>
   </div>
 <% end %>
-<% if params[:multiple] %>
-  <div>
-    <% if params[:withdraw] %>
-      <button id="make-multiple-withdrawal">Retirar a seleccionados</button>
-    <% else %>
-      <button id="make-multiple-donation">Donar a seleccionados</button>
-    <% end %>
-  </div>
-<% end %>
-
 
 <% if params[:multiple] %>
   <%= render :partial => "multiple", :locals => { :students => @students } %>

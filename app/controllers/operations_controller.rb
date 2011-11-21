@@ -26,6 +26,49 @@ class OperationsController < ApplicationController
       redirect_to menu_students_path
     end
   end
+  
+  def multiple
+		if (params[:operation] == "donation" || params[:operation] == "withdraw")
+      session[:to_students] = params[:to_students]
+      session[:op_type] = params[:operation]
+      redirect_to new_multiple_user_operations_path(current_user)
+    else
+      redirect_to students_path, :notice => "Operacion invalida"
+    end			
+  end
+  
+  def new_multiple
+  	@students_names = Student.find(session[:to_students]).map{ |s| s.complete_name}.join(", ")
+  end
+  
+  def create_multiple
+  	to_users = Student.find(session[:to_students])
+  	to_users.each do |user|
+  		operation = Operation.new(:amount => params[:operation_amount],
+  															:description => params[:operation_description],
+  															:op_type => session[:op_type], 
+  															:to_user_id => user.id)
+  		donation_result = Operation.new_donation(current_user.id, params[:operation_amount], current_user.pin, user.username)
+  		# Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
+      if donation_result.eql? "Your current balance is now"
+        operation.from_user = current_user
+        operation.after_balance = user.points + operation.amount
+        if operation.save
+          update_user_points(user)
+        end
+      else
+        if donation_result.eql? "The amount must not be over"
+          redirect_to new_multiple_user_operations_path(current_user),
+            :notice => "Las transacciones deben de ser menores a 100 puntos"
+        else
+          redirect_to new_multiple_user_operations_path(current_user), 
+            :notice => "Verifica los valores ingresados"
+        end
+      end 
+  	end
+  	update_user_points(current_user)
+  	redirect_to user_operations_path(current_user)
+  end
 
   def create
     @operation = Operation.new(params[:operation])

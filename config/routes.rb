@@ -13,7 +13,10 @@ Extrapoints::Application.routes.draw do
   resources :users do
     resources :operations do
       collection do
-        get "give_present"        
+        get "give_present"     
+        post "multiple" 
+        get "new_multiple" 
+        post "create_multiple"
       end
     end
     member do
