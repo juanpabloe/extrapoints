@@ -189,15 +189,11 @@ header #logo-holder {
 	margin:20px auto 0px auto;
 }
 
-#main-menu a {
-	float: left;
-	width:50%;
+#main-menu .menu-icon {
 	text-align:center;
+	padding:4% 0%;
 }
 
-#main-menu #menu-icon-5 {
-	width:100%;
-}
 
 footer div {
 	width:49%;

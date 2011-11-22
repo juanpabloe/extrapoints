@@ -14,5 +14,9 @@
   <%= text_area_tag(:operation_to, "#{@students_names}", :readonly => true) %>
   <%= number_field_tag(:operation_amount, '',:placeholder=>'Puntos...', :min=>'1', :max=>'100', :class=>"required")%>
   <%= text_field_tag(:operation_description, '', :placeholder=>'Concepto...', :class=>"required")%>
-  <a id="operation_confirm" data-role="button">Realizar operaci&oacute;n</a>
+	<% if session[:op_type] == "donation" %>
+		<a id="operation_confirm" data-role="button">Donar</a>
+	<% else %>
+		<a id="operation_confirm" data-role="button">Retirar</a>
+	<% end %>
 <% end %>
