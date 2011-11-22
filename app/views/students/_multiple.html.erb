@@ -1,7 +1,7 @@
 <%= form_tag(multiple_user_operations_path(current_user,:operation => params[:operation]), :method => "post") do %>
 	<fieldset class="ui-grid-a">
 		<div class="">
-		<% if params[:withdraw] %>
+		<% if params[:operation] == 'withdraw' %>
 		  <button type="submit" data-theme="c">Retirar a seleccionados</button>
 		<% else %>
 		  <button type="submit" data-theme="c">Donar a seleccionados</button>

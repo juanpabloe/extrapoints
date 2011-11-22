@@ -16,5 +16,10 @@
   <%= f.text_field :description, :placeholder=>'Concepto...', :class=>"required" %>
   <%= f.hidden_field :to_user_id, :value => @student.id %>
   <%= f.hidden_field :op_type, :value => @operation.op_type %>
-  <a id="operation_confirm" data-role="button">Realizar operaci&oacute;n</a>
+	<% if @operation.op_type == "donation" %>
+		<a id="operation_confirm" data-role="button">Donar</a>
+	<% else %>
+		<a id="operation_confirm" data-role="button">Retirar</a>
+	<% end %>
+  
 <% end %>
