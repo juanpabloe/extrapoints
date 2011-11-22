@@ -33,14 +33,12 @@ class StudentsController < ApplicationController
       withdraw_result = Operation.confirm_withdraw(p.transaction_id, p.user_id, p.user_pin, p.amount)
       # Cuando el retiro es exitoso, el webservice regresa un mensaje indicando el balance actual
       if withdraw_result.eql? "Your current balance is now"
-        withdraw = Operation.create!(:to_user_id => p.user_id, 
-                                    :from_user_id => p.from_user,
-                                    :op_type => "withdraw",
-                                    :amount => p.amount, 
-                                    :after_balance => (current_user.points - p.amount),
-                                    :description => p.description)
-
-        if withdraw.save
+        if Operation.create!(:to_user_id => p.user_id, 
+                             :from_user_id => p.from_user,
+                             :op_type => "withdraw",
+                             :amount => p.amount, 
+                             :after_balance => (current_user.points - p.amount),
+                             :description => p.description)
           update_user_points(p.user)
           update_user_points(User.find(p.from_user))
           p.destroy

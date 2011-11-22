@@ -7,10 +7,7 @@ class Operation < ActiveRecord::Base
 
 	validates_presence_of :amount
 	validates_numericality_of :amount, :greater_than => 0
-	validates_presence_of :description
 
-  #scope :all_operations, where("from_user_id = #{current_user.id} OR to_user_id = #{current_user.id}")
-	
   #Llamada al webservice "Begin_transfer" de Mobile Money
   def self.new_donation(user_id, amount, pin, receiver)
     client = Savon::Client.new(MOBILE_MONEY)

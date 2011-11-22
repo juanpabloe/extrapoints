@@ -55,7 +55,7 @@ class OperationsController < ApplicationController
       redirect_to user_operations_path(current_user)
 	  elsif session[:op_type] == 'withdraw'
 		  to_users.each do |user|
-        make_withdraw(user, multiple_donation, params[:operation_amount], params[:description])
+        make_withdraw(user, multiple_donation, params[:operation_amount], params[:operation_description])
 		  end
       redirect_to menu_teachers_path, 
         :notice => "Ticket de retiro creado exitosamente. Se cobrara una vez que el estudiante inicie sesion."
