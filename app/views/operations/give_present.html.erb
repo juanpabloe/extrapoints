@@ -4,23 +4,24 @@
 	 <%= flash[:warning] || flash[:notice] %>
   </div>
 <% end %>
-<div id="presents">
-	<div class="present-holder">
+<div id="presents" class="ui-grid-a">
+	<div class="present-holder ui-block-a menu-icon">
 		<%= link_to (image_tag "present1.png"), "#", :id => '1', "class"=>"present" %>
 		<span>10 puntos</span>
 	</div>
-	<div class="present-holder">
+	<div class="present-holder ui-block-b menu-icon">
 		<%= link_to (image_tag "present2.png"), "#", :id => '2', "class"=>"present" %>
 		<span>20 puntos</span>
 	</div>
-	<div class="present-holder">
+	<div class="present-holder ui-block-a menu-icon">
 		<%= link_to (image_tag "present3.png"), "#", :id => '3', "class"=>"present" %>
 		<span>30 puntos</span>
 	</div>
-	<div class="present-holder">
+	<div class="present-holder ui-block-b menu-icon">
 		<%= link_to (image_tag "present4.png"), "#", :id => '4', "class"=>"present" %>
 		<span>50 puntos</span>
 	</div>
+</div>
 </div>
 
 <%= form_for @operation, :url => { :action => :create } do |f| %>
