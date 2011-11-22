@@ -350,22 +350,26 @@ h2#title {
 	position:relative;
 }
 
-
-#alumnos-multiple .selected {
-   	text-shadow: 0 -1px 1px black;
-	background-image: -webkit-gradient(linear,left top,left bottom,from(#333),to(#5a5a5a));
-	background-image: -webkit-linear-gradient(top,#333,#5a5a5a);
-	background-image: -moz-linear-gradient(top,#333,#5a5a5a);
-	background-image: -ms-linear-gradient(top,#333,#5a5a5a);
-	background-image: -o-linear-gradient(top,#333,#5a5a5a);
-	background-image: linear-gradient(top,#333,#5a5a5a);
-	color:#fff;
-	border: 1px solid black;
+#alumnos-multiple div.ui-checkbox label {
+	border: none;
+	background: transparent;
 }
 
-#alumnos-multiple .student-name {
-   display:inline-block;
-   width:70%;
+#alumnos-multiple div.ui-checkbox label .ui-btn-inner {
+	border:none;
+}
+
+#alumnos-multiple div.ui-checkbox label .ui-icon {
+	background: #ccc;
+}
+
+#alumnos-multiple div.ui-checkbox label ..ui-icon-checkbox-off {
+	background:transparent;
+}
+
+#alumnos-multiple div.ui-checkbox label .ui-icon-checkbox-on {
+	background: url(icons-18-white.png) #4596CE;
+	background-position: -648px 50%;
 }
 /***************************************************************************************************
 ****************************************************************************************************
