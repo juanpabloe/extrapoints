@@ -43,65 +43,60 @@ class OperationsController < ApplicationController
   
   def create_multiple
   	to_users = Student.find(session[:to_students])
+    multiple_donation = true
   	if session[:op_type] == 'donation'
 			to_users.each do |user|
-				operation = Operation.new(:amount => params[:operation_amount],
+				@operation = Operation.new(:amount => params[:operation_amount],
 																	:description => params[:operation_description],
 																	:op_type => session[:op_type], 
 																	:to_user_id => user.id)
-				donation_result = Operation.new_donation(current_user.id, params[:operation_amount], current_user.pin, user.username)
-				# Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
-		    if donation_result.eql? "Your current balance is now"
-		      operation.from_user = current_user
-		      operation.after_balance = user.points + operation.amount
-		      if operation.save
-		        update_user_points(user)
-		      end
-		    else
-		      if donation_result.eql? "The amount must not be over"
-		        redirect_to new_multiple_user_operations_path(current_user),
-		          :notice => "Las transacciones deben de ser menores a 100 puntos"
-		      else
-		        redirect_to new_multiple_user_operations_path(current_user), 
-		          :notice => "Verifica los valores ingresados"
-		      end
-		    end 
-			end
+        make_donation(user, multiple_donation)
+      end
+      redirect_to user_operations_path(current_user)
 	  elsif session[:op_type] == 'withdraw'
 		  to_users.each do |user|
-				#Llama al webservice													
-			 	transaction = Operation.new_withdraw(current_user.id, current_user.pin, params[:operation_amount]).to_i 
-
-				if Pretransaction.create!(:transaction_id => transaction,
-				                          :user_id => user.id,
-				                          :user_pin => user.pin,
-				                          :amount => params[:operation_amount],
-				                          :from_user => current_user.id,
-				                          :description => params[:operation_description])
-				else 
-				    redirect_to new_multiple_user_operations_path(current_user), 
-		          :notice => "Verifica los valores ingresados"
-				end 	
+        make_withdraw(user, multiple_donation, params[:operation_amount], params[:operation_description])
 		  end
-	  end #se acaba withdra
-  	redirect_to user_operations_path(current_user)
+      redirect_to menu_teachers_path, 
+        :notice => "Ticket de retiro creado exitosamente. Se cobrara una vez que el estudiante inicie sesion."
+	  end
   end
 
   def create
     @operation = Operation.new(params[:operation])
     to_user = Student.find(params[:operation][:to_user_id])
+    multiple_donation = false
 
     if @operation.op_type == "donation"
-      donation_result = Operation.new_donation(current_user.id, @operation.amount, current_user.pin, to_user.username) 
+      make_donation(to_user, multiple_donation)
+    elsif @operation.op_type == "withdraw" and current_user.teacher?
+      make_withdraw(to_user, multiple_donation, @operation.amount, @operation.description)
+    end
+  end
 
-      # Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
-      if donation_result.eql? "Your current balance is now"
-        @operation.from_user = current_user
-        @operation.after_balance = to_user.points + @operation.amount
-        if @operation.save
-          update_user_points(current_user)
-          update_user_points(to_user)
-          redirect_to user_operations_path(current_user)
+
+  private
+
+  def make_donation(to_user, multiple)
+    donation_result = Operation.new_donation(current_user.id, @operation.amount, current_user.pin, to_user.username) 
+
+    # Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
+    if donation_result.eql? "Your current balance is now"
+      @operation.from_user = current_user
+      @operation.after_balance = to_user.points + @operation.amount
+      if @operation.save
+        update_user_points(to_user)
+        update_user_points(current_user) unless multiple
+        redirect_to user_operations_path(current_user) unless multiple
+      end
+    else
+      if multiple
+        if donation_result.eql? "The amount must not be over"
+          redirect_to new_multiple_user_operations_path(current_user),
+            :notice => "Las transacciones deben de ser menores a 100 puntos"
+        else
+          redirect_to new_multiple_user_operations_path(current_user), 
+            :notice => "Verifica los valores ingresados"
         end
       else
         if donation_result.eql? "The amount must not be over"
@@ -112,20 +107,28 @@ class OperationsController < ApplicationController
             :notice => "Verifica los valores ingresados"
         end
       end
-    elsif @operation.op_type == "withdraw" and current_user.teacher?
-      transaction = Operation.new_withdraw(current_user.id, current_user.pin, @operation.amount).to_i 
+    end
+  end
 
-      if Pretransaction.create!(:transaction_id => transaction,
-                                :user_id => to_user.id,
-                                :user_pin => to_user.pin,
-                                :amount => @operation.amount,
-                                :from_user => current_user.id,
-                                :description => @operation.description)
-
-        redirect_to menu_teachers_path, :notice => "Ticket de retiro creado exitosamente. Se cobrara una vez que el estudiante inicie sesion."
-      else 
-          redirect_to new_user_operation_path(current_user, :to_student => to_user.id, :operation => "withdraw"), 
-            :notice => "Verifica los valores ingresados"
+  def make_withdraw(to_user, multiple, amount, description)
+    transaction = Operation.new_withdraw(current_user.id, current_user.pin, amount).to_i 
+    if Pretransaction.create!(:transaction_id => transaction,
+                              :user_id => to_user.id,
+                              :user_pin => to_user.pin,
+                              :amount => amount,
+                              :from_user => current_user.id,
+                              :description => description)
+      if !multiple
+        redirect_to menu_teachers_path, 
+          :notice => "Ticket de retiro creado exitosamente. Se cobrara una vez que el estudiante inicie sesion."
+      end
+    else 
+      if multiple
+        redirect_to new_multiple_user_operations_path(current_user), 
+          :notice => "Verifica los valores ingresados"
+      else
+        redirect_to new_user_operation_path(current_user, :to_student => to_user.id, :operation => "withdraw"), 
+          :notice => "Verifica los valores ingresados"
       end
     end
   end
