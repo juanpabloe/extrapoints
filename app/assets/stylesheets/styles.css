@@ -384,9 +384,6 @@ h2#title {
 	background: #ccc;
 }
 
-#alumnos-multiple div.ui-checkbox label ..ui-icon-checkbox-off {
-	background:transparent;
-}
 
 #alumnos-multiple div.ui-checkbox label .ui-icon-checkbox-on {
 	background: url(icons-18-white.png) #4596CE;
