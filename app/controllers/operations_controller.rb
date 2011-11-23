@@ -43,41 +43,55 @@ class OperationsController < ApplicationController
   
   def create_multiple
   	to_users = Student.find(session[:to_students])
-    multiple_donation = true
+    @multiple = { :amount_over => false, :multiple => true }
+
   	if session[:op_type] == 'donation'
 			to_users.each do |user|
 				@operation = Operation.new(:amount => params[:operation_amount],
 																	:description => params[:operation_description],
 																	:op_type => session[:op_type], 
 																	:to_user_id => user.id)
-        make_donation(user, multiple_donation)
+        make_donation(user, @multiple)
       end
-      redirect_to user_operations_path(current_user)
 	  elsif session[:op_type] == 'withdraw'
 		  to_users.each do |user|
-        make_withdraw(user, multiple_donation, params[:operation_amount], params[:operation_description])
+        make_withdraw(user, params[:operation_amount], params[:operation_description])
 		  end
-      redirect_to menu_teachers_path, 
-        :notice => "Ticket de retiro creado exitosamente. Se cobrara una vez que el estudiante inicie sesion."
 	  end
+    if @multiple[:amount_over] and @multiple[:multiple]
+      redirect_to new_multiple_user_operations_path(current_user),
+        :notice => "Las transacciones deben de ser menores a 100 puntos"
+    else
+      redirect_to new_multiple_user_operations_path(current_user), 
+        :notice => "Verifica los valores ingresados"
+    end
+    unless @multiple[:amount_over]
+      remove_temp_sessions 
+      redirect_to user_operations_path(current_user)
+    end
   end
 
   def create
     @operation = Operation.new(params[:operation])
     to_user = Student.find(params[:operation][:to_user_id])
-    multiple_donation = false
+    @multiple = { :amount_over => false, :multiple => false }
 
     if @operation.op_type == "donation"
-      make_donation(to_user, multiple_donation)
+      make_donation(to_user)
     elsif @operation.op_type == "withdraw" and current_user.teacher?
-      make_withdraw(to_user, multiple_donation, @operation.amount, @operation.description)
+      make_withdraw(to_user, @operation.amount, @operation.description)
     end
   end
 
 
   private
 
-  def make_donation(to_user, multiple)
+  def remove_temp_sessions
+    session[:op_type] = nil
+    session[:to_students] = nil
+  end
+
+  def make_donation(to_user)
     donation_result = Operation.new_donation(current_user.id, @operation.amount, current_user.pin, to_user.username) 
 
     # Cuando la transferencia es exitosa, el webservice regresa un mensaje indicando el balance actual
@@ -86,17 +100,15 @@ class OperationsController < ApplicationController
       @operation.after_balance = to_user.points + @operation.amount
       if @operation.save
         update_user_points(to_user)
-        update_user_points(current_user) unless multiple
-        redirect_to user_operations_path(current_user) unless multiple
+        update_user_points(current_user) unless @multiple[:multiple]
+        redirect_to user_operations_path(current_user) unless  @multiple[:multiple]
       end
     else
-      if multiple
+      if @multiple[:multiple]
         if donation_result.eql? "The amount must not be over"
-          redirect_to new_multiple_user_operations_path(current_user),
-            :notice => "Las transacciones deben de ser menores a 100 puntos"
+          return @multiple = { :amount_over => true, :multiple => true }
         else
-          redirect_to new_multiple_user_operations_path(current_user), 
-            :notice => "Verifica los valores ingresados"
+          return @multiple = { :amount_over => false, :multiple => true }
         end
       else
         if donation_result.eql? "The amount must not be over"
@@ -110,25 +122,37 @@ class OperationsController < ApplicationController
     end
   end
 
-  def make_withdraw(to_user, multiple, amount, description)
-    transaction = Operation.new_withdraw(current_user.id, current_user.pin, amount).to_i 
-    if Pretransaction.create!(:transaction_id => transaction,
-                              :user_id => to_user.id,
-                              :user_pin => to_user.pin,
-                              :amount => amount,
-                              :from_user => current_user.id,
-                              :description => description)
-      if !multiple
+  def make_withdraw(to_user, amount, description)
+    transaction = Operation.new_withdraw(current_user.id, current_user.pin, amount)
+    t_id = transaction[:transaction_id].to_i
+    error = transaction[:error_message][0..26]
+
+    if error.eql? "none"
+      Pretransaction.create!(:transaction_id => t_id,
+                             :user_id => to_user.id,
+                             :user_pin => to_user.pin,
+                             :amount => amount,
+                             :from_user => current_user.id,
+                             :description => description)
+      if !@multiple[:multiple]
         redirect_to menu_teachers_path, 
           :notice => "Ticket de retiro creado exitosamente. Se cobrara una vez que el estudiante inicie sesion."
       end
     else 
-      if multiple
-        redirect_to new_multiple_user_operations_path(current_user), 
-          :notice => "Verifica los valores ingresados"
+      if @multiple[:multiple]
+        if error.eql? "The amount must not be over"
+          return @multiple = { :amount_over => true, :multiple => true }
+        else
+          return @multiple = { :amount_over => false, :multiple => true }
+        end
       else
-        redirect_to new_user_operation_path(current_user, :to_student => to_user.id, :operation => "withdraw"), 
-          :notice => "Verifica los valores ingresados"
+        if error.eql? "The amount must not be over"
+          redirect_to new_user_operation_path(current_user, :to_student => to_user.id, :operation => "withdraw"),
+            :notice => "Las transacciones deben de ser menores a 100 puntos"
+        else 
+          redirect_to new_user_operation_path(current_user, :to_student => to_user.id, :operation => "withdraw"), 
+            :notice => "Verifica los valores ingresados"
+        end
       end
     end
   end

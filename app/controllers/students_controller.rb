@@ -18,6 +18,9 @@ class StudentsController < ApplicationController
   end
 
   def menu
+    if current_user.teacher?
+      redirect_to menu_teachers_path
+    end
   end
 
   private

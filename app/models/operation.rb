@@ -23,7 +23,7 @@ class Operation < ActiveRecord::Base
     response = client.request :wsdl, :create_withdraw do
       soap.body = "<sellerU>#{teacher_id}</sellerU><pin>#{teacher_pin}</pin><amount>#{amount}</amount><location>0,0</location><phoneNumber>0</phoneNumber><imei>#{teacher_id}</imei><imsi>#{teacher_id}</imsi>"
     end
-    response[:res_message][:transaction_id]
+    response[:res_message]
   end
 
   #Llamada al webservice "Confirm_withdraw" de Mobile Money
