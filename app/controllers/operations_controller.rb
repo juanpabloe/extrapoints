@@ -113,7 +113,7 @@ class OperationsController < ApplicationController
       else
         if donation_result.eql? "The amount must not be over"
           redirect_to new_user_operation_path(current_user, :to_student => to_user.id, :operation => "donation"),
-            :notice => "Las transacciones deben de ser menores a 100 puntos"
+            :notice => "El monto debe de ser menor a 100 puntos y mayor a 0"
         else 
           redirect_to new_user_operation_path(current_user, :to_student => to_user.id, :operation => "donation"), 
             :notice => "Verifica los valores ingresados"
@@ -135,8 +135,8 @@ class OperationsController < ApplicationController
                              :from_user => current_user.id,
                              :description => description)
       if !@multiple[:multiple]
-        redirect_to menu_teachers_path, 
-          :notice => "Ticket de retiro creado exitosamente. Se cobrara una vez que el estudiante inicie sesion."
+        flash[:error] = "Ticket de retiro creado exitosamente. Se cobrara una vez que el estudiante inicie sesion."
+        redirect_to menu_teachers_path
       end
     else 
       if @multiple[:multiple]

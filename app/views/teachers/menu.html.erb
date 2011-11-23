@@ -1,8 +1,8 @@
 <div data-role="container" id="container">
-<% if flash[:warning] or flash[:notice] %>
+<% if flash[:warning] or flash[:notice] or flash[:error] %>
   <div id="notice" <% if flash[:warning] %>class="warning"<% end %>>
 	 <a class="close" href="#">×</a>
-	 <p><%= flash[:warning] || flash[:notice] %></p>
+	 <p><%= flash[:warning] || flash[:notice] || flash[:error] %></p>
   </div>
 <% end %>
     <div id="main-menu" class="ui-grid-a">

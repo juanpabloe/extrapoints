@@ -5,7 +5,7 @@
 		 <p><%= flash[:warning] || flash[:notice] %></p>
 	  </div>
 	<% end %>
-	<%= form_tag sessions_path, :id=>'login-form' do %>
+	<%= form_tag sessions_path, :id=>'login-form' ,"data-ajax"=>"false" do %>
 	 <div class="fieldcontain">
 		<%= label_tag :usuario %><br />
 		<%= text_field_tag :username, params[:username] %>

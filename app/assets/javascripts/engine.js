@@ -22,12 +22,11 @@ $(document).ready(function() {
 		      	if (monto.passed && descripcion.passed) {
 		      		$("#new_operation").submit();	
 		      	} else {
+		      		$("#notice").hide();
 				   	if (!monto.passed) {
-				   		$("#notice").remove();
 				   		$("#title").after("<div id=\"notice\" class=\"warning\"><a class=\"close\" href=\"#\">×</a>"+
 							 						"<p>"+monto.message+"</p></div>");
 				   	} else if (!descripcion.passed) {
-				   		$("#notice").remove();
 							$("#title").after("<div id=\"notice\" class=\"warning\"><a class=\"close\" href=\"#\">×</a>"+
 							 						"<p>"+descripcion.message+"</p></div>");
 				   	}
@@ -122,8 +121,8 @@ function validaMonto(obj) {
 	var monto = $(obj.selector).val();
 	var foo;
 	if (typeof monto !== 'undefined' && monto !== null && monto != "" && monto.length > 0) {
-		if (parseFloat(monto) > 100) {
-			foo = { passed: false, message: "Las transacciones deben de ser menores a 100 puntos" };
+		if (parseFloat(monto) > 100 || parseFloat(monto) < 1 ){
+			foo = { passed: false, message: "El monto debe de ser menor a 100 puntos y mayor a 0" };
 		} else {
 			foo = { passed: true, message: "string" };
 		}
