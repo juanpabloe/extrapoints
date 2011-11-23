@@ -2,6 +2,9 @@ $(document).ready(function() {
 	$("#new_operation").bind("keypress", function(e) {
 		if (e.keyCode == 45) return false;
 	});
+	$("#notice").live('click', function () {
+		$(this).hide();
+	});
 	//Confirmation box student donation form
 	$('#operation_confirm').live('click', function() {
 		$(this).simpledialog({

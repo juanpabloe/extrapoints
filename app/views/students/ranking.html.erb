@@ -2,9 +2,9 @@
    <div id="title">L&Iacute;DERES ACTUALES</div>
    <ul id="ranking-list" data-role="listview" >
       <% @students.each_with_index do |student, index| %>
-      <li class="ranking-list-element" >
+      <li class="ranking-list-element clearfix" >
          <div class="ranking-list-position"># <%= index + 1 %></div>
-         <div class="ranking-list-student"><%= student.complete_name %></div>
+         <div class="ranking-list-student"><p><%= student.complete_name %></p></div>
          <div class="ranking-list-points"><%= student.points %></div>
       </li>
       <% end %>

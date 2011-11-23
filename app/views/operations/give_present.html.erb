@@ -1,7 +1,8 @@
 <h2 id="title">Elige el regalo que desees mandar</h2>
 <% if flash[:warning] or flash[:notice] %>
   <div id="notice" <% if flash[:warning] %>class="warning"<% end %>>
-	 <%= flash[:warning] || flash[:notice] %>
+	 <a class="close" href="#">×</a>
+	 <p><%= flash[:warning] || flash[:notice] %></p>
   </div>
 <% end %>
 <div id="presents" class="ui-grid-a">
