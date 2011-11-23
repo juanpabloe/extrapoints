@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	$("#alumnos-multiple li").bind('click', function() {
+		$(this).toggleClass('selected');
 	$("#new_operation").bind("keypress", function(e) {
 		if (e.keyCode == 45) return false;
 	});

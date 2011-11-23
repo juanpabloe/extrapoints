@@ -392,7 +392,10 @@ h2#title {
 #container {
 	position:relative;
 }
-/*
+
+#alumnos-multiple li.selected {
+	background:#999;
+}
 #alumnos-multiple div.ui-checkbox label {
 	border: none;
 	background: transparent;
@@ -410,7 +413,7 @@ h2#title {
 #alumnos-multiple div.ui-checkbox label .ui-icon-checkbox-on {
 	background: url(icons-18-white.png) #4596CE;
 	background-position: -648px 50%;
-}*/
+}
 /***************************************************************************************************
 ****************************************************************************************************
 *********************************************GIFT**********************************************
