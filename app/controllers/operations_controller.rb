@@ -10,7 +10,7 @@ class OperationsController < ApplicationController
   end
 
   def new
-    if (params[:operation] == "donation" || params[:operation] == "withdraw") and params[:to_student] != current_user.id
+    if (params[:operation] == "donation" || (params[:operation] == "withdraw" and current_user.teacher?)) and params[:to_student] != current_user.id
       @student = Student.find(params[:to_student])
       @operation = Operation.new(:op_type => params[:operation], :to_user_id => params[:to_student])
     else
@@ -51,7 +51,7 @@ class OperationsController < ApplicationController
 																	:description => params[:operation_description],
 																	:op_type => session[:op_type], 
 																	:to_user_id => user.id)
-        make_donation(user, @multiple)
+        make_donation(user)
       end
 	  elsif session[:op_type] == 'withdraw'
 		  to_users.each do |user|
@@ -61,12 +61,10 @@ class OperationsController < ApplicationController
     if @multiple[:amount_over] and @multiple[:multiple]
       redirect_to new_multiple_user_operations_path(current_user),
         :notice => "Las transacciones deben de ser menores a 100 puntos"
-    else
+    elsif @multiple[:multiple] and @multiple[:error]
       redirect_to new_multiple_user_operations_path(current_user), 
         :notice => "Verifica los valores ingresados"
-    end
-    unless @multiple[:amount_over]
-      remove_temp_sessions 
+    else 
       redirect_to user_operations_path(current_user)
     end
   end
@@ -86,10 +84,6 @@ class OperationsController < ApplicationController
 
   private
 
-  def remove_temp_sessions
-    session[:op_type] = nil
-    session[:to_students] = nil
-  end
 
   def make_donation(to_user)
     donation_result = Operation.new_donation(current_user.id, @operation.amount, current_user.pin, to_user.username) 
@@ -100,15 +94,13 @@ class OperationsController < ApplicationController
       @operation.after_balance = to_user.points + @operation.amount
       if @operation.save
         update_user_points(to_user)
-        update_user_points(current_user) unless @multiple[:multiple]
-        redirect_to user_operations_path(current_user) unless  @multiple[:multiple]
       end
     else
       if @multiple[:multiple]
         if donation_result.eql? "The amount must not be over"
           return @multiple = { :amount_over => true, :multiple => true }
         else
-          return @multiple = { :amount_over => false, :multiple => true }
+          return @multiple = { :amount_over => false, :multiple => true, :error => true }
         end
       else
         if donation_result.eql? "The amount must not be over"
@@ -143,7 +135,7 @@ class OperationsController < ApplicationController
         if error.eql? "The amount must not be over"
           return @multiple = { :amount_over => true, :multiple => true }
         else
-          return @multiple = { :amount_over => false, :multiple => true }
+          return @multiple = { :amount_over => false, :multiple => true, :error => true }
         end
       else
         if error.eql? "The amount must not be over"

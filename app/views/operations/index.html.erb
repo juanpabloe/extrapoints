@@ -14,6 +14,7 @@
      	<% end %>
       <div class="transaction-info">
         <p class="users"><%= operation.to_user.complete_name %><span class="amount"> <%= operation.amount %> puntos</span>.</p>
+        <p class="users">De parte de <%= operation.from_user == current_user ? "tuya" : operation.from_user.first_name %>. </p>
         <p class="users"><%= operation.description %>. </p>
         <p class="users">Puntos restantes: <%= operation.after_balance %>. </p>
         <div class="time-place">

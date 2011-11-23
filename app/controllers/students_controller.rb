@@ -21,9 +21,15 @@ class StudentsController < ApplicationController
     if current_user.teacher?
       redirect_to menu_teachers_path
     end
+    remove_temp_sessions
   end
 
   private
+
+  def remove_temp_sessions
+    session[:op_type] = nil
+    session[:to_students] = nil
+  end
   
   #Metodo para sincronizar el balance de puntos del estudiante con la base de datos de los webservices
   def update_current_user_points
