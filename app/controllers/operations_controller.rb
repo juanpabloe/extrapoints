@@ -76,6 +76,7 @@ class OperationsController < ApplicationController
 
     if @operation.op_type == "donation"
       make_donation(to_user)
+      redirect_to user_operations_path(current_user)
     elsif @operation.op_type == "withdraw" and current_user.teacher?
       make_withdraw(to_user, @operation.amount, @operation.description)
     end

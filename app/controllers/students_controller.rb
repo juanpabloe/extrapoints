@@ -18,10 +18,10 @@ class StudentsController < ApplicationController
   end
 
   def menu
+  	 remove_temp_sessions
     if current_user.teacher?
       redirect_to menu_teachers_path
     end
-    remove_temp_sessions
   end
 
   private

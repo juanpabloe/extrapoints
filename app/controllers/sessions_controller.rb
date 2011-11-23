@@ -11,7 +11,9 @@ class SessionsController < ApplicationController
 		 if ws_login[:user_id].to_i >= 1
 		   assign_session_credentials(user, ws_login) 
 		   user.update_user_points
-		   redirect_to after_sign_in_path(user)
+		   respond_to do |format|
+			  format.html { redirect_to after_sign_in_path(user) }
+			end 
 		 elsif ws_login[:user_id].to_i == -2
 		   User.logout(ws_login[:user_id])
 		   redirect_to log_in_path, :notice => "Ya te has logueado en otro sistema"
