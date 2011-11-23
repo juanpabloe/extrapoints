@@ -14,8 +14,25 @@ $(document).ready(function() {
 		  'buttons' : {
 		  	'SI': {
 		      click: function () {
-		      	$('.ui-btn-text',this).text('Enviando...');
-		        $("#new_operation").submit();
+		      	var textoBtn = $('.ui-btn-text',this);
+		      	var prevText = $(textoBtn).text();
+		      	$(textoBtn).text('Enviando...');
+		      	var monto = validaMonto($('#operation_amount',this));
+		      	var descripcion = validaDescripción($('#operation_description',this));
+		      	if (monto.passed && descripcion.passed) {
+		      		$("#new_operation").submit();	
+		      	} else {
+				   	if (!monto.passed) {
+				   		$("#notice").remove();
+				   		$("#title").after("<div id=\"notice\" class=\"warning\"><a class=\"close\" href=\"#\">×</a>"+
+							 						"<p>"+monto.message+"</p></div>");
+				   	} else if (!descripcion.passed) {
+				   		$("#notice").remove();
+							$("#title").after("<div id=\"notice\" class=\"warning\"><a class=\"close\" href=\"#\">×</a>"+
+							 						"<p>"+descripcion.message+"</p></div>");
+				   	}
+				   	$(textoBtn).text(prevText);
+		      	}
 		      }
 		    },
 		    'NO': {
@@ -99,4 +116,29 @@ function mandaRegalo(premio) {
 			break;
 		}
 	}
+}
+
+function validaMonto(obj) {
+	var monto = $(obj.selector).val();
+	var foo;
+	if (typeof monto !== 'undefined' && monto !== null && monto != "" && monto.length > 0) {
+		if (parseFloat(monto) > 100) {
+			foo = { passed: false, message: "Las transacciones deben de ser menores a 100 puntos" };
+		} else {
+			foo = { passed: true, message: "string" };
+		}
+		return foo;
+	}
+	foo = { passed: false, message: "Verifica los valores ingresados" };
+	return foo;
+}
+
+function validaDescripción(obj) {
+	var monto = $(obj.selector).val();
+	if (typeof monto !== 'undefined' && monto !== null && monto != "" && monto.length > 0) {
+		foo = { passed: true, message: "string" };
+		return foo;
+	}
+	foo = { passed: false, message: "Verifica los valores ingresados" };
+	return foo;
 }
