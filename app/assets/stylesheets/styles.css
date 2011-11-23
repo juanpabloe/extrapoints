@@ -4,6 +4,10 @@ body {
   font-size: 14px;
 }
 
+.ui-page {
+    -webkit-backface-visibility: hidden;
+}
+
 a img {
   border: none;
 }
