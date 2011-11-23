@@ -10,7 +10,7 @@ class OperationsController < ApplicationController
   end
 
   def new
-    if (params[:operation] == "donation" || params[:operation] == "withdraw") and params[:to_student] != current_user.id
+    if (params[:operation] == "donation" || (params[:operation] == "withdraw" and current_user.teacher?)) and params[:to_student] != current_user.id
       @student = Student.find(params[:to_student])
       @operation = Operation.new(:op_type => params[:operation], :to_user_id => params[:to_student])
     else
